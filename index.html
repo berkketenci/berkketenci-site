@@ -31,14 +31,14 @@
     a:hover {
       text-decoration: underline;
     }
-    .line::after {
-      content: '■';
+    .cursor {
       display: inline-block;
-      width: 10px;
-      height: 10px;
-      margin-left: 4px;
+      width: 8px;
+      height: 14px;
       background-color: #00FF00;
+      margin-left: 2px;
       animation: blink 0.3s steps(1, start) infinite;
+      vertical-align: bottom;
     }
     @keyframes blink {
       0%, 50% { opacity: 1; }
@@ -48,20 +48,18 @@
       .text-container {
         font-size: 0.65rem;
         line-height: 1.2;
-        white-space: nowrap;
-        overflow-x: auto;
       }
     }
   </style>
 </head>
 <body>
   <div class="text-container">
-    <div class="line"><a href="/berkvesika.jpg" target="_blank">berk ketenci</a></div>
-    <div class="line"><a href="https://x.com/zamaninkafesi" target="_blank">x.com/zamaninkafesi</a></div>
-    <div class="line"><a href="https://linkedin.com/in/berkketenci" target="_blank">linkedin.com/in/berkketenci</a></div>
-    <div class="line"><a href="https://open.spotify.com/show/6He4TEEaoKesCVryd5gNHN" target="_blank">open.spotify.com/show/6He4TEEaoKesCVryd5gNHN</a></div>
-    <div class="line"><a href="https://instagram.com/thisiswhereishowyouhowcooliam" target="_blank">instagram.com/thisiswhereishowyouhowcooliam</a></div>
-    <div class="line"><a href="mailto:berkketenci@gmail.com">berkketenci@gmail.com</a></div>
+    <div><a href="/berkvesika.jpg" target="_blank">berk ketenci</a><span class="cursor"></span></div>
+    <div><a href="https://x.com/zamaninkafesi" target="_blank">x.com/zamaninkafesi</a><span class="cursor"></span></div>
+    <div><a href="https://linkedin.com/in/berkketenci" target="_blank">linkedin.com/in/berkketenci</a><span class="cursor"></span></div>
+    <div><a href="https://open.spotify.com/show/6He4TEEaoKesCVryd5gNHN" target="_blank">open.spotify.com/show/6He4TEEaoKesCVryd5gNHN</a><span class="cursor"></span></div>
+    <div><a href="https://instagram.com/thisiswhereishowyouhowcooliam" target="_blank">instagram.com/thisiswhereishowyouhowcooliam</a><span class="cursor"></span></div>
+    <div><a href="mailto:berkketenci@gmail.com">berkketenci@gmail.com</a><span class="cursor"></span></div>
   </div>
 </body>
 </html>
