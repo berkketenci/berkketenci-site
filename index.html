@@ -18,10 +18,11 @@
     }
     .text-container {
       text-align: right;
-      font-size: 0.9rem;
-      line-height: 1.6;
-      max-width: 90%;
-      word-break: break-word;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow-x: auto;
     }
     a {
       color: #00FF00;
@@ -30,24 +31,25 @@
     a:hover {
       text-decoration: underline;
     }
-    .line::before {
-      content: '■ ';
+    .line::after {
+      content: '■';
       display: inline-block;
       width: 10px;
       height: 10px;
-      margin-right: 6px;
+      margin-left: 4px;
       background-color: #00FF00;
-      animation: blink 1s steps(2, start) infinite;
+      animation: blink 0.3s steps(1, start) infinite;
     }
     @keyframes blink {
-      0% { opacity: 1; }
-      50% { opacity: 0; }
-      100% { opacity: 1; }
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
     }
     @media screen and (max-width: 600px) {
       .text-container {
-        font-size: 0.8rem;
-        line-height: 1.4;
+        font-size: 0.65rem;
+        line-height: 1.2;
+        white-space: nowrap;
+        overflow-x: auto;
       }
     }
   </style>
