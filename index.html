@@ -12,7 +12,7 @@
       height: 100vh;
       margin: 0;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: flex-start;
       padding: 20px;
     }
@@ -30,6 +30,15 @@
     a:hover {
       text-decoration: underline;
     }
+    .line::before {
+      content: '> ';
+      animation: blink 1s steps(2, start) infinite;
+    }
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
     @media screen and (max-width: 600px) {
       .text-container {
         font-size: 0.8rem;
@@ -40,12 +49,12 @@
 </head>
 <body>
   <div class="text-container">
-    <div><a href="/IMG_7C3BAAD7F5F0-1.jpeg" target="_blank">berk ketenci</a></div>
-    <div><a href="https://x.com/zamaninkafesi" target="_blank">x.com/zamaninkafesi</a></div>
-    <div><a href="https://linkedin.com/in/berkketenci" target="_blank">linkedin.com/in/berkketenci</a></div>
-    <div><a href="https://open.spotify.com/show/6He4TEEaoKesCVryd5gNHN" target="_blank">open.spotify.com/show/6He4TEEaoKesCVryd5gNHN</a></div>
-    <div><a href="https://instagram.com/thisiswhereishowyouhowcooliam" target="_blank">instagram.com/thisiswhereishowyouhowcooliam</a></div>
-    <div><a href="mailto:berkketenci@gmail.com">berkketenci@gmail.com</a></div>
+    <div class="line"><a href="/berkvesika.jpg" target="_blank">berk ketenci</a></div>
+    <div class="line"><a href="https://x.com/zamaninkafesi" target="_blank">x.com/zamaninkafesi</a></div>
+    <div class="line"><a href="https://linkedin.com/in/berkketenci" target="_blank">linkedin.com/in/berkketenci</a></div>
+    <div class="line"><a href="https://open.spotify.com/show/6He4TEEaoKesCVryd5gNHN" target="_blank">open.spotify.com/show/6He4TEEaoKesCVryd5gNHN</a></div>
+    <div class="line"><a href="https://instagram.com/thisiswhereishowyouhowcooliam" target="_blank">instagram.com/thisiswhereishowyouhowcooliam</a></div>
+    <div class="line"><a href="mailto:berkketenci@gmail.com">berkketenci@gmail.com</a></div>
   </div>
 </body>
 </html>
