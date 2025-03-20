@@ -11,35 +11,33 @@
       font-family: Menlo, Monaco, monospace;
       height: 100vh;
       margin: 0;
-      overflow: hidden;
       display: flex;
       justify-content: flex-end;
       align-items: flex-start;
-      padding: 20px;
+      padding: 40px;
     }
     .text-container {
-      white-space: nowrap;
-      overflow: hidden;
-      font-size: 1rem;
-      direction: rtl;
       text-align: right;
+      font-size: 1rem;
+      line-height: 1.8;
     }
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
+    a {
+      color: #FFFF00;
+      text-decoration: none;
     }
-    .typing {
-      display: inline-block;
-      width: 0;
-      overflow: hidden;
-      animation: typing 6s steps(60, end) infinite;
-      direction: rtl;
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="text-container">
-    <span class="typing">i collect ideas and try to make them real. sometimes they work. sometimes they don’t. either way, welcome. email: berkketenci@gmail.com | instagram: instagram.com/thisiswhereishowyouhowcooliam | x: x.com/zamaninkafesi | podcast: open.spotify.com/show/6He4TEEaoKesCVryd5gNHN | linkedin: linkedin.com/in/berkketenci</span>
+    <div>berk ketenci</div>
+    <div><a href="https://x.com/zamaninkafesi" target="_blank">x.com/zamaninkafesi</a></div>
+    <div><a href="https://linkedin.com/in/berkketenci" target="_blank">linkedin.com/in/berkketenci</a></div>
+    <div><a href="https://open.spotify.com/show/6He4TEEaoKesCVryd5gNHN" target="_blank">open.spotify.com/show/6He4TEEaoKesCVryd5gNHN</a></div>
+    <div><a href="https://instagram.com/thisiswhereishowyouhowcooliam" target="_blank">instagram.com/thisiswhereishowyouhowcooliam</a></div>
+    <div><a href="mailto:berkketenci@gmail.com">berkketenci@gmail.com</a></div>
   </div>
 </body>
 </html>
