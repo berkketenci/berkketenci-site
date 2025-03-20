@@ -32,6 +32,20 @@
     .menu-list div {
       margin: 4px 0;
     }
+    .menu-list a {
+      color: #00FF00;
+      text-decoration: none;
+    }
+    .menu-list a:hover {
+      text-decoration: underline;
+    }
+    .blinker {
+      display: inline-block;
+      width: 10px;
+      height: 14px;
+      background-color: #00FF00;
+      margin-left: 5px;
+    }
     .selection-line {
       margin-top: 2em;
     }
@@ -53,7 +67,7 @@
       display: flex;
       align-items: center;
     }
-    .cursor-line span {
+    .cursor-line span.cursor-blink {
       display: inline-block;
       width: 10px;
       height: 14px;
@@ -73,26 +87,39 @@
       i5/OS Main Menu
     </div>
     <div class="system">
-      System: OSYS1
+      System: ALLAHYOKDINYALAN
     </div>
     <div class="menu-list">
-      <div>1. berk ketenci photo</div>
-      <div>2. x.com/zamaninkafesi</div>
-      <div>3. linkedin.com/in/berkketenci</div>
-      <div>4. open.spotify.com/show/6He4TEEaoKesCVryd5gNHN</div>
-      <div>5. instagram.com/thisiswhereishowyouhowcooliam</div>
-      <div>6. email: berkketenci@gmail.com</div>
-      <div>90. Sign off</div>
+      <div><a href="./berkvesika-v2.jpg" target="_blank">1. berk ketenci photo</a><span class="blinker"></span></div>
+      <div><a href="https://x.com/zamaninkafesi" target="_blank">2. x.com/zamaninkafesi</a><span class="blinker"></span></div>
+      <div><a href="https://linkedin.com/in/berkketenci" target="_blank">3. linkedin.com/in/berkketenci</a><span class="blinker"></span></div>
+      <div><a href="https://open.spotify.com/show/6He4TEEaoKesCVryd5gNHN" target="_blank">4. open.spotify.com/show/6He4TEEaoKesCVryd5gNHN</a><span class="blinker"></span></div>
+      <div><a href="https://instagram.com/thisiswhereishowyouhowcooliam" target="_blank">5. instagram.com/thisiswhereishowyouhowcooliam</a><span class="blinker"></span></div>
+      <div><a href="mailto:berkketenci@gmail.com">6. email: berkketenci@gmail.com</a><span class="blinker"></span></div>
+      <div>90. Sign off<span class="blinker"></span></div>
     </div>
     <div class="selection-line">
       <span>Selection or command</span> ===>
     </div>
     <div class="cursor-line">
-      <span></span>
+      <span class="cursor-blink"></span>
     </div>
     <div class="copyright">
       (C) COPYRIGHT BERKK CORP. 1991, 2025.
     </div>
   </div>
+
+  <script>
+    // Random blinkers animation
+    const blinkers = document.querySelectorAll('.blinker');
+
+    blinkers.forEach(blinker => {
+      function randomBlink() {
+        blinker.style.opacity = Math.random() > 0.5 ? '1' : '0';
+        setTimeout(randomBlink, Math.random() * 1000 + 300);
+      }
+      randomBlink();
+    });
+  </script>
 </body>
 </html>
