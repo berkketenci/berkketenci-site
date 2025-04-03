@@ -5,57 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>berk ketenci - terminal style</title>
   <style>
+    @font-face {
+      font-family: 'OCR-A';
+      src: url('./fonts/OCRAEXT.TTF') format('truetype');
+    }
+
     body {
       background-color: black;
       color: #00FF00;
-      font-family: Courier, monospace;
+      font-family: 'OCR-A', monospace;
       margin: 0;
       padding: 20px;
     }
+
     .container {
       max-width: 600px;
       margin: 0 auto;
       line-height: 1.8;
     }
+
     .menu-header {
       color: #B0B0B0;
       margin-bottom: 1em;
     }
+
     .menu-header a {
       color: #FFFFFF;
       text-decoration: none;
     }
+
     .menu-header a:hover {
       text-decoration: underline;
     }
+
     .system {
       text-align: right;
       color: #00FF00;
       font-weight: bold;
     }
+
     .system a {
       color: #00FF00;
       text-decoration: none;
     }
+
     .system a:hover {
       text-decoration: underline;
-      text-decoration-color: #00FF00;
-      text-underline-offset: 3px;
     }
+
     .menu-list {
       margin-top: 1em;
     }
+
     .menu-list div {
       margin: 4px 0;
     }
+
     .menu-list a {
       color: #00FF00;
       text-decoration: none;
       cursor: pointer;
     }
+
     .menu-list a:hover {
       text-decoration: underline;
     }
+
     .blinker {
       display: inline-block;
       width: 10px;
@@ -63,13 +78,16 @@
       background-color: #00FF00;
       margin-left: 5px;
     }
+
     .selection-line {
       margin-top: 2em;
     }
+
     .selection-line span {
       display: inline-block;
       width: 12ch;
     }
+
     .copyright {
       margin-top: 3em;
       color: #B0B0B0;
@@ -77,6 +95,7 @@
       border-top: 1px solid #00FF00;
       padding-top: 1em;
     }
+
     .cursor-line {
       border-top: 1px solid #00FF00;
       margin-top: 0.5em;
@@ -84,6 +103,7 @@
       display: flex;
       align-items: center;
     }
+
     .cursor-line span.cursor-blink {
       display: inline-block;
       width: 10px;
@@ -92,6 +112,7 @@
       margin-left: 5px;
       animation: blink 0.6s steps(1, start) infinite;
     }
+
     @keyframes blink {
       0%, 50% { opacity: 1; }
       51%, 100% { opacity: 0; }
@@ -101,11 +122,13 @@
 <body>
   <div class="container">
     <div class="menu-header">
-      i5/OS_blank">Main Menu
+      i5/OS <a href="110214-dinyalan_490.jpg" target="_blank">Main Menu</a>
     </div>
+
     <div class="system">
-      System: <a href="http://boykotyap.com" target="_blank">&lt;Boyunegme&gt;</a>
+      System: <a href="./images.jpeg" target="_blank">lifeisadayroomistoday</a>
     </div>
+
     <div class="menu-list">
       <div><a href="https://x.com/zamaninkafesi" target="_blank">1. x</a><span class="blinker"></span></div>
       <div><a href="https://instagram.com/thisiswhereishowyouhowcooliam" target="_blank">2. ig</a><span class="blinker"></span></div>
@@ -114,15 +137,17 @@
       <div><a href="./low_quality_bw_headshot.jpg" target="_blank">5. jpeg</a><span class="blinker"></span></div>
       <div><a href="https://open.spotify.com/show/6He4TEEaoKesCVryd5gNHN" target="_blank">6. podcast</a><span class="blinker"></span></div>
       <div><a href="https://linkedin.com/in/berkketenci" target="_blank">7. linkedin</a><span class="blinker"></span></div>
-      <div><a href="https://letterboxd.com/opp799" target="_blank">8. letterboxd</a><span class="blinker"></span></div>
       <div><a href="https://www.google.com" target="_blank">90. Sign off</a><span class="blinker"></span></div>
     </div>
+
     <div class="selection-line">
       <span>Selection or command</span> ===>
     </div>
+
     <div class="cursor-line">
       <span class="cursor-blink"></span>
     </div>
+
     <div class="copyright">
       (C) COPYRIGHT BERKOFSKY CORP. 1991, 2025.
     </div>
