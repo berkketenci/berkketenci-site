@@ -48,7 +48,37 @@
       margin: 0;
       padding: 20px;
     }
+body {
+  color: #00FF00;
+  font-family: 'OCR-A', monospace;
+  margin: 0;
+  padding: 20px;
+}
 
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: white;
+  animation: blink 1s infinite;
+}
+
+body::before {
+  top: 30%;
+}
+
+body::after {
+  top: 70%;
+  animation-delay: 0.5s;
+}
+
+@keyframes blink {
+  0%, 20%, 100% { opacity: 0; }
+  10%, 50% { opacity: 1; }
+}
     .container {
       max-width: 600px;
       margin: 0 auto;
