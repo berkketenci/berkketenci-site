@@ -31,19 +31,29 @@
     }
 
     body {
-  background: url('background.gif') no-repeat center center fixed;
-  background-size: cover;
-  color: #00FF00;
-  font-family: 'OCR-A', monospace;
-  margin: 0;
-  padding: 20px;
-}
+      color: #00FF00;
+      font-family: 'OCR-A', monospace;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .bg-gif {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      pointer-events: none;
     }
 
     .container {
       max-width: 600px;
       margin: 0 auto;
       line-height: 1.8;
+      position: relative;
+      z-index: 1;
     }
 
     .menu-header {
@@ -133,6 +143,9 @@
   </style>
 </head>
 <body>
+  <!-- GIF background image -->
+  <img src="ezgif-8271b2cc5803b2-3.gif" class="bg-gif">
+
   <div class="container">
     <div class="menu-header">
       i5/OS Main Menu
@@ -143,9 +156,7 @@
     </div>
 
     <div class="menu-list">
-
-      
-            <div><a href="https://wa.me/905369922646" target="_blank">1. wp</a><span class="blinker"></span></div>
+      <div><a href="https://wa.me/905369922646" target="_blank">1. wp</a><span class="blinker"></span></div>
       <div><a href="https://t.me/LifeIsADayRoomIsToday" target="_blank">2. tg</a><span class="blinker"></span></div>
       <div><a href="./low_quality_bw_headshot.jpg" target="_blank">3. jpg</a><span class="blinker"></span></div>
       <div><a href="mailto:berkketenci@gmail.com">4. mail</a><span class="blinker"></span></div>
