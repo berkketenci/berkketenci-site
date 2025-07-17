@@ -30,13 +30,7 @@
       src: url('./fonts/OCRAEXT.TTF') format('truetype');
     }
 
-    body {
-      color: #00FF00;
-      font-family: 'OCR-A', monospace;
-      margin: 0;
-      padding: 20px;
-    }
-
+    /* Background GIF */
     .bg-gif {
       position: fixed;
       top: 0;
@@ -48,12 +42,17 @@
       pointer-events: none;
     }
 
+    body {
+      color: #00FF00;
+      font-family: 'OCR-A', monospace;
+      margin: 0;
+      padding: 20px;
+    }
+
     .container {
       max-width: 600px;
       margin: 0 auto;
       line-height: 1.8;
-      position: relative;
-      z-index: 1;
     }
 
     .menu-header {
@@ -143,8 +142,8 @@
   </style>
 </head>
 <body>
-  <!-- GIF background image -->
-  <img src="ezgif-8271b2cc5803b2-3.gif" class="bg-gif">
+  <!-- Background GIF -->
+  <img class="bg-gif" src="ezgif-8271b2cc5803b2-3.gif" alt="background animation">
 
   <div class="container">
     <div class="menu-header">
