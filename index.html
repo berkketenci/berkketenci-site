@@ -212,5 +212,17 @@ body::after {
       randomBlink();
     });
   </script>
+  <audio id="beep-sound" src="./445976__breviceps__error-signal-1.wav" preload="auto"></audio>
+<script>
+  document.addEventListener("click", () => {
+    const beep = document.getElementById("beep-sound");
+    if (beep) {
+      beep.currentTime = 0; // rewind
+      beep.play().catch((e) => {
+        console.log("User interaction needed to play sound:", e);
+      });
+    }
+  });
+</script>
 </body>
 </html>
