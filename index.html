@@ -224,5 +224,30 @@ body::after {
     }
   });
 </script>
+  <audio id="beep-sound" src="./445976__breviceps__error-signal-1.wav" preload="auto"></audio>
+
+<script>
+  const beep = document.getElementById("beep-sound");
+
+  // Try playing once on load (if allowed)
+  window.addEventListener("load", () => {
+    if (beep) {
+      beep.currentTime = 0;
+      beep.play().catch((e) => {
+        console.log("Browser blocked autoplay. Waiting for user click...");
+      });
+    }
+  });
+
+  // Play on every click
+  document.addEventListener("click", () => {
+    if (beep) {
+      beep.currentTime = 0;
+      beep.play().catch((e) => {
+        console.log("User interaction required to play sound:", e);
+      });
+    }
+  });
+</script>
 </body>
 </html>
