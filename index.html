@@ -30,55 +30,35 @@
       src: url('./fonts/OCRAEXT.TTF') format('truetype');
     }
 
-    /* Background GIF */
-    .bg-gif {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
-      pointer-events: none;
-    }
-
     body {
       color: #00FF00;
       font-family: 'OCR-A', monospace;
       margin: 0;
       padding: 20px;
     }
-body {
-  color: #00FF00;
-  font-family: 'OCR-A', monospace;
-  margin: 0;
-  padding: 20px;
-}
 
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  left: 0;
-  width: 100%;
-  height: 20px;
-  background: white;
-  animation: blink 1s infinite;
-}
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      background: white;
+      animation: blink 1s infinite;
+    }
 
-body::before {
-  top: 30%;
-}
+    body::before { top: 30%; }
+    body::after {
+      top: 70%;
+      animation-delay: 0.5s;
+    }
 
-body::after {
-  top: 70%;
-  animation-delay: 0.5s;
-}
+    @keyframes blink {
+      0%, 20%, 100% { opacity: 0; }
+      10%, 50% { opacity: 1; }
+    }
 
-@keyframes blink {
-  0%, 20%, 100% { opacity: 0; }
-  10%, 50% { opacity: 1; }
-}
     .container {
       max-width: 600px;
       margin: 0 auto;
@@ -164,30 +144,20 @@ body::after {
       margin-left: 5px;
       animation: blink 0.6s steps(1, start) infinite;
     }
-
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
   </style>
 </head>
+
 <body>
-  <!-- Background GIF -->
-
   <div class="container">
-    <div class="menu-header">
-      i5/OS Main Menu
-    </div>
+    <div class="menu-header">i5/OS Main Menu</div>
 
-    <div class="system">
-      System: none
-    </div>
+    <div class="system">System: none</div>
 
     <div class="menu-list">
       <div><a href="cv berk ketenci 10.2025.pdf" target="_blank">1. cv</a><span class="blinker"></span></div>
       <div><a href="./low_quality_bw_headshot.jpg" target="_blank">2. jpg</a><span class="blinker"></span></div>
       <div><a href="mailto:berkketenci@gmail.com">3. mail</a><span class="blinker"></span></div>
-      <div><a href="https://linkedin.com/in/berkketenci">4. linkedin</a><span class="blinker"></span></div>    
+      <div><a href="https://linkedin.com/in/berkketenci">4. linkedin</a><span class="blinker"></span></div>
     </div>
 
     <div class="selection-line">
@@ -203,7 +173,10 @@ body::after {
     </div>
   </div>
 
+  <audio id="beep-sound" src="./445976__breviceps__error-signal-1.wav" preload="auto"></audio>
+
   <script>
+    // Blinker animation
     const blinkers = document.querySelectorAll('.blinker');
     blinkers.forEach(blinker => {
       function randomBlink() {
@@ -212,43 +185,27 @@ body::after {
       }
       randomBlink();
     });
-  </script>
-  <audio id="beep-sound" src="./445976__breviceps__error-signal-1.wav" preload="auto"></audio>
-<script>
-  document.addEventListener("click", () => {
+
+    // Sound trigger
     const beep = document.getElementById("beep-sound");
-    if (beep) {
-      beep.currentTime = 0; // rewind
-      beep.play().catch((e) => {
-        console.log("User interaction needed to play sound:", e);
-      });
-    }
-  });
-</script>
-  <audio id="beep-sound" src="./445976__breviceps__error-signal-1.wav" preload="auto"></audio>
 
-<script>
-  const beep = document.getElementById("beep-sound");
+    window.addEventListener("load", () => {
+      if (beep) {
+        beep.currentTime = 0;
+        beep.play().catch(e => {
+          console.log("Autoplay blocked. Waiting for click...", e);
+        });
+      }
+    });
 
-  // Try playing once on load (if allowed)
-  window.addEventListener("load", () => {
-    if (beep) {
-      beep.currentTime = 0;
-      beep.play().catch((e) => {
-        console.log("Browser blocked autoplay. Waiting for user click...");
-      });
-    }
-  });
-
-  // Play on every click
-  document.addEventListener("click", () => {
-    if (beep) {
-      beep.currentTime = 0;
-      beep.play().catch((e) => {
-        console.log("User interaction required to play sound:", e);
-      });
-    }
-  });
-</script>
+    document.addEventListener("click", () => {
+      if (beep) {
+        beep.currentTime = 0;
+        beep.play().catch(e => {
+          console.log("Click play failed:", e);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
