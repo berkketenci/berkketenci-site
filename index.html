@@ -5,21 +5,17 @@
   <!-- rebuild trigger -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Title -->
   <title>kestrels breed looking farther than i can see</title>
   <meta property="og:title" content="kestrels breed looking farther than i can see" />
   <meta name="twitter:title" content="kestrels breed looking farther than i can see" />
 
-  <!-- Description -->
   <meta name="description" content="without tact to read" />
   <meta property="og:description" content="without tact to read" />
   <meta name="twitter:description" content="without tact to read" />
 
-  <!-- URL -->
   <meta property="og:url" content="https://berkketenci.com/" />
   <meta name="twitter:url" content="https://berkketenci.com/" />
 
-  <!-- Image Thumbnail -->
   <meta property="og:image" content="https://berkketenci.com/thumbnailsexy.png" />
   <meta name="twitter:image" content="https://berkketenci.com/thumbnailsexy.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -45,7 +41,7 @@
       width: 100%;
       height: 20px;
       background: white;
-      animation: blink 1s infinite;
+      animation: blinkBody 1s infinite;
     }
 
     body::before { top: 30%; }
@@ -54,9 +50,14 @@
       animation-delay: 0.5s;
     }
 
-    @keyframes blink {
+    @keyframes blinkBody {
       0%, 20%, 100% { opacity: 0; }
       10%, 50% { opacity: 1; }
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
     }
 
     .container {
@@ -74,15 +75,6 @@
       text-align: right;
       color: #00FF00;
       font-weight: bold;
-    }
-
-    .system a {
-      color: #00FF00;
-      text-decoration: none;
-    }
-
-    .system a:hover {
-      text-decoration: underline;
     }
 
     .menu-list {
@@ -109,6 +101,7 @@
       height: 14px;
       background-color: #00FF00;
       margin-left: 5px;
+      animation: blink 0.7s step-start infinite;
     }
 
     .selection-line {
@@ -146,7 +139,6 @@
     }
   </style>
 </head>
-
 <body>
   <div class="container">
     <div class="menu-header">i5/OS Main Menu</div>
@@ -157,7 +149,7 @@
       <div><a href="cv berk ketenci 10.2025.pdf" target="_blank">1. cv</a><span class="blinker"></span></div>
       <div><a href="./low_quality_bw_headshot.jpg" target="_blank">2. jpg</a><span class="blinker"></span></div>
       <div><a href="mailto:berkketenci@gmail.com">3. mail</a><span class="blinker"></span></div>
-      <div><a href="https://linkedin.com/in/berkketenci">4. linkedin</a><span class="blinker"></span></div>
+      <div><a href="https://linkedin.com/in/berkketenci" target="_blank">4. linkedin</a><span class="blinker"></span></div>
     </div>
 
     <div class="selection-line">
@@ -176,32 +168,23 @@
   <audio id="beep-sound" src="./445976__breviceps__error-signal-1.wav" preload="auto"></audio>
 
   <script>
-    // Blinker animation
-    const blinkers = document.querySelectorAll('.blinker');
-    blinkers.forEach(blinker => {
-      function randomBlink() {
-        blinker.style.opacity = Math.random() > 0.5 ? '1' : '0';
-        setTimeout(randomBlink, Math.random() * 1000 + 300);
-      }
-      randomBlink();
-    });
-
-    // Sound trigger
     const beep = document.getElementById("beep-sound");
 
+    // Attempt to play on load
     window.addEventListener("load", () => {
       if (beep) {
         beep.currentTime = 0;
-        beep.play().catch(e => {
-          console.log("Autoplay blocked. Waiting for click...", e);
+        beep.play().catch((e) => {
+          console.log("Autoplay blocked:", e);
         });
       }
     });
 
+    // Play on every click
     document.addEventListener("click", () => {
       if (beep) {
         beep.currentTime = 0;
-        beep.play().catch(e => {
+        beep.play().catch((e) => {
           console.log("Click play failed:", e);
         });
       }
