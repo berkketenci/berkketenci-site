@@ -26,11 +26,20 @@
       src: url('./fonts/OCRAEXT.TTF') format('truetype');
     }
 
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       color: #00FF00;
       font-family: 'OCR-A', monospace;
-      margin: 0;
-      padding: 20px;
+      min-height: 100vh;
+      padding: 4vh 5vw;
+      box-sizing: border-box;
+      font-size: clamp(20px, 2.8vw, 44px);
+      overflow-x: hidden;
     }
 
     body::before,
@@ -42,6 +51,8 @@
       height: 20px;
       background: white;
       animation: blinkBody 1s infinite;
+      z-index: 0;
+      pointer-events: none;
     }
 
     body::before { top: 30%; }
@@ -61,9 +72,12 @@
     }
 
     .container {
-      max-width: 600px;
+      width: 100%;
+      max-width: 100%;
       margin: 0 auto;
-      line-height: 1.8;
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
     }
 
     .menu-header {
@@ -78,11 +92,12 @@
     }
 
     .menu-list {
-      margin-top: 1em;
+      margin-top: 1.2em;
+      font-size: 1.25em;
     }
 
     .menu-list div {
-      margin: 4px 0;
+      margin: 0.4em 0;
     }
 
     .menu-list a {
@@ -97,10 +112,11 @@
 
     .blinker {
       display: inline-block;
-      width: 10px;
-      height: 14px;
+      width: 0.6ch;
+      height: 1em;
       background-color: #00FF00;
-      margin-left: 5px;
+      margin-left: 0.4ch;
+      vertical-align: middle;
       animation: blink 0.7s step-start infinite;
     }
 
@@ -108,21 +124,8 @@
       margin-top: 2em;
     }
 
-    .selection-line span {
-      display: inline-block;
-      width: 12ch;
-    }
-
-    .copyright {
-      margin-top: 3em;
-      color: #B0B0B0;
-      font-size: 0.8rem;
-      border-top: 1px solid #00FF00;
-      padding-top: 1em;
-    }
-
     .cursor-line {
-      border-top: 1px solid #00FF00;
+      border-top: 2px solid #00FF00;
       margin-top: 0.5em;
       padding-top: 0.5em;
       display: flex;
@@ -131,36 +134,48 @@
 
     .cursor-line span.cursor-blink {
       display: inline-block;
-      width: 10px;
-      height: 14px;
+      width: 0.6ch;
+      height: 1em;
       background-color: #00FF00;
-      margin-left: 5px;
+      margin-left: 0.4ch;
       animation: blink 0.6s steps(1, start) infinite;
+    }
+
+    .copyright {
+      margin-top: 2.5em;
+      color: #B0B0B0;
+      font-size: 0.65em;
+      border-top: 2px solid #00FF00;
+      padding-top: 1em;
+    }
+
+    .matrix-text {
+      white-space: pre-wrap;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="menu-header">i5/OS Main Menu</div>
+    <div class="menu-header matrix-text">i5/OS Main Menu</div>
 
-    <div class="system">System: none</div>
+    <div class="system matrix-text">System: none</div>
 
     <div class="menu-list">
-      <div><a href="cv berk ketenci 10.2025.pdf" target="_blank">1. cv</a><span class="blinker"></span></div>
-      <div><a href="./low_quality_bw_headshot.jpg" target="_blank">2. jpg</a><span class="blinker"></span></div>
-      <div><a href="mailto:berkketenci@gmail.com">3. mail</a><span class="blinker"></span></div>
-      <div><a href="https://linkedin.com/in/berkketenci" target="_blank">4. linkedin</a><span class="blinker"></span></div>
+      <div><a href="cv berk ketenci 10.2025.pdf" target="_blank" class="matrix-text">1. cv</a><span class="blinker"></span></div>
+      <div><a href="./low_quality_bw_headshot.jpg" target="_blank" class="matrix-text">2. jpg</a><span class="blinker"></span></div>
+      <div><a href="mailto:berkketenci@gmail.com" class="matrix-text">3. mail</a><span class="blinker"></span></div>
+      <div><a href="https://linkedin.com/in/berkketenci" target="_blank" class="matrix-text">4. linkedin</a><span class="blinker"></span></div>
     </div>
 
     <div class="selection-line">
-      <span>Selection or command</span> ===>
+      <span class="matrix-text">Selection or command</span> <span class="matrix-text">===&gt;</span>
     </div>
 
     <div class="cursor-line">
       <span class="cursor-blink"></span>
     </div>
 
-    <div class="copyright">
+    <div class="copyright matrix-text">
       (C) COPYRIGHT BERKOFSKY CORP. 1991, 2026.
     </div>
   </div>
@@ -170,7 +185,6 @@
   <script>
     const beep = document.getElementById("beep-sound");
 
-    // Attempt to play on load
     window.addEventListener("load", () => {
       if (beep) {
         beep.currentTime = 0;
@@ -180,7 +194,6 @@
       }
     });
 
-    // Play on every click
     document.addEventListener("click", () => {
       if (beep) {
         beep.currentTime = 0;
@@ -189,6 +202,117 @@
         });
       }
     });
+
+    /* ---------- Matrix decrypt/encrypt effect ---------- */
+    const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/\\";
+    const isWhitespace = (c) => c === ' ' || c === '\n' || c === '\t';
+    const randChar = () => SCRAMBLE_CHARS[(Math.random() * SCRAMBLE_CHARS.length) | 0];
+
+    class MatrixText {
+      constructor(el) {
+        this.el = el;
+        this.original = el.textContent;
+        this.chars = [...this.original];
+        this.revealed = this.chars.map(() => false);
+        this.render();
+      }
+
+      render() {
+        let out = '';
+        for (let i = 0; i < this.chars.length; i++) {
+          const c = this.chars[i];
+          if (isWhitespace(c)) out += c;
+          else if (this.revealed[i]) out += c;
+          else out += randChar();
+        }
+        this.el.textContent = out;
+      }
+
+      scrambleAll() {
+        for (let i = 0; i < this.revealed.length; i++) this.revealed[i] = false;
+        this.render();
+      }
+
+      revealIndices() {
+        const idx = [];
+        for (let i = 0; i < this.chars.length; i++) {
+          if (!isWhitespace(this.chars[i])) idx.push(i);
+        }
+        // shuffle
+        for (let i = idx.length - 1; i > 0; i--) {
+          const j = (Math.random() * (i + 1)) | 0;
+          [idx[i], idx[j]] = [idx[j], idx[i]];
+        }
+        return idx;
+      }
+
+      decrypt(duration = 1200) {
+        const order = this.revealIndices();
+        if (order.length === 0) return Promise.resolve();
+        const perChar = Math.max(12, duration / order.length);
+        const start = performance.now();
+        let revealed = 0;
+
+        return new Promise((resolve) => {
+          const tick = () => {
+            const elapsed = performance.now() - start;
+            const target = Math.min(order.length, Math.floor(elapsed / perChar));
+            while (revealed < target) {
+              this.revealed[order[revealed]] = true;
+              revealed++;
+            }
+            this.render();
+            if (revealed < order.length) {
+              requestAnimationFrame(tick);
+            } else {
+              resolve();
+            }
+          };
+          requestAnimationFrame(tick);
+        });
+      }
+
+      flicker() {
+        const live = [];
+        for (let i = 0; i < this.chars.length; i++) {
+          if (!isWhitespace(this.chars[i]) && this.revealed[i]) live.push(i);
+        }
+        if (!live.length) return;
+        const idx = live[(Math.random() * live.length) | 0];
+        this.revealed[idx] = false;
+        this.render();
+        setTimeout(() => {
+          this.revealed[idx] = true;
+          this.render();
+        }, 50 + Math.random() * 150);
+      }
+    }
+
+    const instances = [...document.querySelectorAll('.matrix-text')].map(el => new MatrixText(el));
+
+    (async () => {
+      // Staggered initial decrypt
+      await Promise.all(instances.map((m, i) =>
+        new Promise(res => setTimeout(res, i * 60))
+          .then(() => m.decrypt(900 + Math.random() * 700))
+      ));
+
+      // Continuous subtle flicker — a few chars at a time across random elements
+      setInterval(() => {
+        const count = 2 + ((Math.random() * 3) | 0);
+        for (let k = 0; k < count; k++) {
+          const m = instances[(Math.random() * instances.length) | 0];
+          m.flicker();
+        }
+      }, 110);
+
+      // Periodic full re-scramble + decrypt on a random element
+      setInterval(() => {
+        const m = instances[(Math.random() * instances.length) | 0];
+        m.scrambleAll();
+        setTimeout(() => m.decrypt(700 + Math.random() * 800), 120);
+      }, 2800);
+    })();
   </script>
 </body>
 </html>
