@@ -20,12 +20,11 @@
   <meta name="twitter:image" content="https://berkketenci.com/thumbnailsexy.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <style>
-    @font-face {
-      font-family: 'OCR-A';
-      src: url('./fonts/OCRAEXT.TTF') format('truetype');
-    }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
+  <style>
     html, body {
       height: 100%;
       margin: 0;
@@ -34,26 +33,33 @@
     }
 
     body {
-      color: #00FF00;
-      font-family: 'OCR-A', monospace;
+      color: #0AFF0A;
+      font-family: 'EB Garamond', Garamond, 'Times New Roman', serif;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       padding: 4vh 5vw;
       box-sizing: border-box;
-      font-size: clamp(20px, 2.6vw, 40px);
+      font-size: clamp(22px, 2.5vmin, 40px);
       overflow-x: hidden;
+      line-height: 1.35;
+      font-feature-settings: "liga" 0, "clig" 0;
+      font-variant-ligatures: none;
     }
 
+    /* Scanline bars */
     body::before,
     body::after {
       content: "";
       position: fixed;
       left: 0;
       width: 100%;
-      height: 20px;
+      height: 18px;
       background: white;
       animation: blinkBody 1s infinite;
-      z-index: 0;
+      z-index: 3;
       pointer-events: none;
+      mix-blend-mode: difference;
     }
     body::before { top: 30%; }
     body::after  { top: 70%; animation-delay: 0.5s; }
@@ -68,37 +74,43 @@
       51%, 100% { opacity: 0; }
     }
 
-    .container {
-      width: 100%;
-      max-width: 100%;
-      margin: 0 auto;
-      line-height: 1.5;
-      position: relative;
-      z-index: 1;
+    /* Matrix rain canvas */
+    #mxrain {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.35;
     }
 
-    .menu-header { color: #B0B0B0; margin-bottom: 1em; }
-    .system     { color: #00FF00; font-weight: bold; text-align: right; }
+    .container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      width: 100%;
+      max-width: 100%;
+    }
 
-    .menu-list { margin-top: 1.2em; font-size: 1.2em; }
+    .menu-header { color: #B0B0B0; margin-bottom: 0.6em; }
+    .system     { color: #0AFF0A; font-weight: 700; text-align: right; margin-bottom: 1.4em; }
+
+    .menu-list {
+      font-size: 1.3em;
+      margin-bottom: 2em;
+    }
 
     .row {
       display: flex;
       align-items: center;
-      margin: 0.4em 0;
+      margin: 0.5em 0;
     }
-
-    .row > a.matrix-text {
-      flex: 1 1 0;
-      min-width: 0;
-    }
-
-    .row > .blinker {
-      flex: 0 0 auto;
-    }
+    .row > a.matrix-text { flex: 1 1 0; min-width: 0; }
+    .row > .blinker      { flex: 0 0 auto; }
 
     .menu-list a {
-      color: #00FF00;
+      color: #0AFF0A;
       text-decoration: none;
       cursor: pointer;
     }
@@ -106,49 +118,94 @@
 
     .blinker {
       display: inline-block;
-      width: 0.6ch;
+      width: 0.4em;
       height: 1em;
-      background-color: #00FF00;
-      margin-left: 0.4ch;
+      background-color: #0AFF0A;
+      margin-left: 0.3em;
       vertical-align: middle;
       animation: blink 0.7s step-start infinite;
+      box-shadow: 0 0 8px #0AFF0A;
     }
 
-    .selection-line { margin-top: 2em; }
+    .selection-line {
+      margin-top: auto;
+      font-weight: 500;
+    }
 
     .cursor-line {
-      border-top: 2px solid #00FF00;
-      margin-top: 0.5em;
-      padding-top: 0.5em;
+      border-top: 2px solid #0AFF0A;
+      margin-top: 0.4em;
+      padding-top: 0.4em;
       display: flex;
       align-items: center;
+      box-shadow: 0 -1px 12px rgba(10, 255, 10, 0.35);
     }
     .cursor-line span.cursor-blink {
       display: inline-block;
-      width: 0.6ch;
+      width: 0.4em;
       height: 1em;
-      background-color: #00FF00;
-      margin-left: 0.4ch;
+      background-color: #0AFF0A;
+      margin-left: 0.3em;
       animation: blink 0.6s steps(1, start) infinite;
+      box-shadow: 0 0 8px #0AFF0A;
     }
 
     .copyright {
-      margin-top: 2.5em;
+      margin-top: 1.6em;
       color: #B0B0B0;
-      font-size: 0.65em;
-      border-top: 2px solid #00FF00;
-      padding-top: 1em;
+      font-size: 0.55em;
+      border-top: 2px solid #0AFF0A;
+      padding-top: 0.8em;
+      letter-spacing: 0.05em;
+      box-shadow: 0 -1px 8px rgba(10, 255, 10, 0.2);
     }
 
-    /* All matrix lines render as single-line filled strips */
+    /* matrix line is a single-row strip */
     .matrix-text {
       display: block;
       white-space: nowrap;
       overflow: hidden;
     }
+
+    /* fixed-width character cells so proportional Garamond still aligns in a grid */
+    .mx-char {
+      display: inline-block;
+      width: 0.62em;
+      text-align: center;
+      overflow: hidden;
+      vertical-align: baseline;
+      transition: color 0.08s linear, text-shadow 0.08s linear;
+    }
+    .mx-char.hot {
+      color: #FFFFFF;
+      text-shadow:
+        0 0 4px #FFF,
+        0 0 10px #0AFF0A,
+        0 0 18px #0AFF0A;
+    }
+    .mx-char.warm {
+      color: #B8FFB8;
+      text-shadow: 0 0 6px rgba(10, 255, 10, 0.7);
+    }
+    .mx-char.dim {
+      color: rgba(10, 255, 10, 0.45);
+    }
+
+    .matrix-text.glitch {
+      animation: glitch 0.18s steps(2) 0s 3;
+    }
+    @keyframes glitch {
+      0%   { transform: translateX(0);   filter: hue-rotate(0deg); }
+      25%  { transform: translateX(3px); filter: hue-rotate(-40deg); }
+      50%  { transform: translateX(-2px); filter: hue-rotate(20deg); }
+      75%  { transform: translateX(1px); filter: hue-rotate(-10deg); }
+      100% { transform: translateX(0);   filter: hue-rotate(0deg); }
+    }
   </style>
 </head>
 <body>
+  <canvas id="mxrain"></canvas>
+
   <div class="container">
     <div class="menu-header matrix-text">i5/OS Main Menu</div>
     <div class="system matrix-text">System: none</div>
@@ -180,21 +237,68 @@
       if (beep) { beep.currentTime = 0; beep.play().catch(() => {}); }
     });
 
-    /* ---------------- Matrix sliding/loading lines ---------------- */
+    /* ================= Matrix rain background ================= */
+    (() => {
+      const canvas = document.getElementById('mxrain');
+      const ctx = canvas.getContext('2d');
+      const RAIN_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ";
+      let W = 0, H = 0, cols = 0, drops = [], fontPx = 16, dpr = 1;
 
-    const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/\\~";
+      function setup() {
+        dpr = window.devicePixelRatio || 1;
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        canvas.style.width = W + 'px';
+        canvas.style.height = H + 'px';
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+        fontPx = Math.max(14, Math.min(22, Math.floor(W / 90)));
+        cols = Math.ceil(W / fontPx);
+        drops = Array.from({ length: cols }, () => Math.random() * -60);
+      }
+      setup();
+      window.addEventListener('resize', setup);
+
+      function tick() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.09)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.font = fontPx + "px 'EB Garamond', monospace";
+        for (let i = 0; i < cols; i++) {
+          const x = i * fontPx;
+          const y = drops[i] * fontPx;
+          const ch = RAIN_CHARS[(Math.random() * RAIN_CHARS.length) | 0];
+          // bright head
+          ctx.fillStyle = 'rgba(220, 255, 220, 0.95)';
+          ctx.fillText(ch, x, y);
+          // trailing (drawn at previous position with green)
+          ctx.fillStyle = 'rgba(10, 255, 10, 0.85)';
+          ctx.fillText(
+            RAIN_CHARS[(Math.random() * RAIN_CHARS.length) | 0],
+            x,
+            y - fontPx
+          );
+          if (y > H && Math.random() > 0.975) drops[i] = 0;
+          drops[i] += 0.6 + Math.random() * 0.9;
+        }
+      }
+      setInterval(tick, 55);
+    })();
+
+    /* ================= Foreground matrix lines ================= */
+
+    const CHARS =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" +
+      "0123456789" +
+      "!@#$%^&*()_+-=[]{}|;:,.<>?/\\~" +
+      "ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ";
     const randChar = () => CHARS[(Math.random() * CHARS.length) | 0];
 
     function measureCharWidth(el) {
-      const probe = document.createElement('span');
-      probe.style.cssText =
-        'visibility:hidden;position:absolute;white-space:pre;' +
-        'font-family:inherit;font-size:inherit;font-weight:inherit;';
-      probe.textContent = 'M'.repeat(30);
-      el.appendChild(probe);
-      const w = probe.getBoundingClientRect().width / 30;
-      probe.remove();
-      return w || 10;
+      // We ourselves use 0.62em cells — compute from that.
+      const fs = parseFloat(getComputedStyle(el).fontSize) || 20;
+      return fs * 0.62;
     }
 
     class MatrixLine {
@@ -204,18 +308,23 @@
         const align = getComputedStyle(el).textAlign;
         this.align = (align === 'right' || align === 'end') ? 'right' : 'left';
 
+        // clear and create spans
+        el.textContent = '';
+        this.spans = [];
         this.fit();
+        this.build();
+
         this.buffer = Array.from(
-          { length: Math.max(this.totalChars * 3, 80) },
+          { length: Math.max(this.totalChars * 3, 120) },
           randChar
         );
         this.offset = 0;
 
         this.revealed = 0;
-        this.state = 'loading';        // loading -> revealing -> idle
-        this.loadDuration = 350 + Math.random() * 450;
-        this.revealSpeed = 35 + Math.random() * 25; // ms per char
-        this.slideInterval = 50 + Math.random() * 40;
+        this.state = 'loading';
+        this.loadDuration = 300 + Math.random() * 450;
+        this.revealSpeed = 25 + Math.random() * 25;
+        this.slideInterval = 35 + Math.random() * 35;
 
         this.loadStart = performance.now() + Math.random() * 400;
         this.lastSlide = 0;
@@ -228,11 +337,29 @@
         const lineW =
           this.el.clientWidth ||
           (this.el.parentElement && this.el.parentElement.clientWidth) ||
-          300;
+          320;
         this.totalChars = Math.max(
           this.original.length + 4,
           Math.floor(lineW / charW) - 1
         );
+      }
+
+      build() {
+        const frag = document.createDocumentFragment();
+        this.spans = [];
+        for (let i = 0; i < this.totalChars; i++) {
+          const s = document.createElement('span');
+          s.className = 'mx-char';
+          s.textContent = ' ';
+          this.spans.push(s);
+          frag.appendChild(s);
+        }
+        this.el.appendChild(frag);
+      }
+
+      rebuild() {
+        this.el.textContent = '';
+        this.build();
       }
 
       charAt(i) {
@@ -244,33 +371,45 @@
         const L = this.original.length;
         const textStart = this.align === 'right' ? n - L : 0;
 
-        let out = '';
         for (let i = 0; i < n; i++) {
           const p = i - textStart;
           const inText = p >= 0 && p < L;
           let reveal = false;
           if (inText) {
-            if (this.align === 'right') {
-              reveal = p >= L - this.revealed;
-            } else {
-              reveal = p < this.revealed;
-            }
+            if (this.align === 'right') reveal = p >= L - this.revealed;
+            else reveal = p < this.revealed;
           }
-          out += reveal ? this.original[p] : this.charAt(i);
+          const span = this.spans[i];
+          if (!span) continue;
+          const newChar = reveal ? this.original[p] : this.charAt(i);
+          if (span.firstChild && span.firstChild.nodeType === 3) {
+            if (span.firstChild.nodeValue !== newChar) span.firstChild.nodeValue = newChar;
+          } else {
+            span.textContent = newChar;
+          }
         }
-        this.el.textContent = out;
       }
 
       slide() {
         this.offset++;
-        // churn the buffer so it doesn't look like a repeating strip
-        const idx = (Math.random() * this.buffer.length) | 0;
-        this.buffer[idx] = randChar();
+        const bi = (Math.random() * this.buffer.length) | 0;
+        this.buffer[bi] = randChar();
+
+        // Sparkle: briefly hot / warm on random positions
+        if (Math.random() < 0.55) {
+          const idx = (Math.random() * this.totalChars) | 0;
+          const span = this.spans[idx];
+          if (span) {
+            const cls = Math.random() < 0.35 ? 'hot' : 'warm';
+            span.classList.add(cls);
+            const ttl = 90 + Math.random() * 260;
+            setTimeout(() => span.classList.remove(cls), ttl);
+          }
+        }
       }
 
       tick(now) {
         if (now < this.loadStart) return;
-
         let dirty = false;
 
         if (now - this.lastSlide >= this.slideInterval) {
@@ -293,9 +432,7 @@
             this.revealed = target;
             dirty = true;
           }
-          if (this.revealed >= this.original.length) {
-            this.state = 'idle';
-          }
+          if (this.revealed >= this.original.length) this.state = 'idle';
         }
 
         if (dirty) this.render();
@@ -304,46 +441,85 @@
       restart() {
         this.state = 'loading';
         this.revealed = 0;
-        this.loadDuration = 300 + Math.random() * 500;
-        this.revealSpeed = 30 + Math.random() * 30;
+        this.loadDuration = 200 + Math.random() * 500;
+        this.revealSpeed = 22 + Math.random() * 28;
         this.loadStart = performance.now();
+      }
+
+      glitch() {
+        this.el.classList.remove('glitch');
+        // reflow to replay animation
+        void this.el.offsetWidth;
+        this.el.classList.add('glitch');
+
+        const saved = this.revealed;
+        const savedState = this.state;
+        this.revealed = 0;
+        this.render();
+        setTimeout(() => {
+          this.revealed = saved;
+          this.state = savedState;
+          this.render();
+        }, 120 + Math.random() * 180);
       }
     }
 
-    const lines = [...document.querySelectorAll('.matrix-text')]
-      .map((el, i) => {
+    function init() {
+      const nodes = [...document.querySelectorAll('.matrix-text')];
+      const lines = nodes.map((el, i) => {
         const m = new MatrixLine(el);
-        m.loadStart = performance.now() + i * 120 + Math.random() * 80;
+        m.loadStart = performance.now() + i * 90 + Math.random() * 120;
         return m;
       });
 
-    function frame(now) {
-      for (const l of lines) l.tick(now);
+      function frame(now) {
+        for (const l of lines) l.tick(now);
+        requestAnimationFrame(frame);
+      }
       requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
 
-    // Periodically re-scramble a random line so it keeps loading
-    setInterval(() => {
-      if (!lines.length) return;
-      const l = lines[(Math.random() * lines.length) | 0];
-      if (l.state === 'idle') l.restart();
-    }, 2600);
+      // Frequent re-load cycles on random idle lines
+      setInterval(() => {
+        if (!lines.length) return;
+        const l = lines[(Math.random() * lines.length) | 0];
+        if (l.state === 'idle') l.restart();
+      }, 1800);
 
-    // Rebuild dimensions on resize
-    let resizeTO;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTO);
-      resizeTO = setTimeout(() => {
-        for (const l of lines) {
-          l.fit();
-          l.buffer = Array.from(
-            { length: Math.max(l.totalChars * 3, 80) },
-            randChar
-          );
+      // Occasional glitch bursts
+      setInterval(() => {
+        if (Math.random() < 0.55) {
+          const idle = lines.filter(l => l.state === 'idle');
+          if (idle.length) {
+            const l = idle[(Math.random() * idle.length) | 0];
+            l.glitch();
+          }
         }
-      }, 120);
-    });
+      }, 700);
+
+      // Rebuild on resize
+      let resizeTO;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTO);
+        resizeTO = setTimeout(() => {
+          for (const l of lines) {
+            l.fit();
+            l.rebuild();
+            l.buffer = Array.from(
+              { length: Math.max(l.totalChars * 3, 120) },
+              randChar
+            );
+            l.render();
+          }
+        }, 120);
+      });
+    }
+
+    // Wait for fonts so char-width calc uses final metrics
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(init);
+    } else {
+      window.addEventListener('load', init);
+    }
   </script>
 </body>
 </html>
