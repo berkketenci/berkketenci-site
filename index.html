@@ -30,6 +30,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
+      background: #000;
     }
 
     body {
@@ -38,7 +39,7 @@
       min-height: 100vh;
       padding: 4vh 5vw;
       box-sizing: border-box;
-      font-size: clamp(20px, 2.8vw, 44px);
+      font-size: clamp(20px, 2.6vw, 40px);
       overflow-x: hidden;
     }
 
@@ -54,20 +55,16 @@
       z-index: 0;
       pointer-events: none;
     }
-
     body::before { top: 30%; }
-    body::after {
-      top: 70%;
-      animation-delay: 0.5s;
-    }
+    body::after  { top: 70%; animation-delay: 0.5s; }
 
     @keyframes blinkBody {
       0%, 20%, 100% { opacity: 0; }
-      10%, 50% { opacity: 1; }
+      10%, 50%      { opacity: 1; }
     }
 
     @keyframes blink {
-      0%, 50% { opacity: 1; }
+      0%, 50%   { opacity: 1; }
       51%, 100% { opacity: 0; }
     }
 
@@ -80,24 +77,24 @@
       z-index: 1;
     }
 
-    .menu-header {
-      color: #B0B0B0;
-      margin-bottom: 1em;
-    }
+    .menu-header { color: #B0B0B0; margin-bottom: 1em; }
+    .system     { color: #00FF00; font-weight: bold; text-align: right; }
 
-    .system {
-      text-align: right;
-      color: #00FF00;
-      font-weight: bold;
-    }
+    .menu-list { margin-top: 1.2em; font-size: 1.2em; }
 
-    .menu-list {
-      margin-top: 1.2em;
-      font-size: 1.25em;
-    }
-
-    .menu-list div {
+    .row {
+      display: flex;
+      align-items: center;
       margin: 0.4em 0;
+    }
+
+    .row > a.matrix-text {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    .row > .blinker {
+      flex: 0 0 auto;
     }
 
     .menu-list a {
@@ -105,10 +102,7 @@
       text-decoration: none;
       cursor: pointer;
     }
-
-    .menu-list a:hover {
-      text-decoration: underline;
-    }
+    .menu-list a:hover { text-decoration: underline; }
 
     .blinker {
       display: inline-block;
@@ -120,9 +114,7 @@
       animation: blink 0.7s step-start infinite;
     }
 
-    .selection-line {
-      margin-top: 2em;
-    }
+    .selection-line { margin-top: 2em; }
 
     .cursor-line {
       border-top: 2px solid #00FF00;
@@ -131,7 +123,6 @@
       display: flex;
       align-items: center;
     }
-
     .cursor-line span.cursor-blink {
       display: inline-block;
       width: 0.6ch;
@@ -149,170 +140,210 @@
       padding-top: 1em;
     }
 
+    /* All matrix lines render as single-line filled strips */
     .matrix-text {
-      white-space: pre-wrap;
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="menu-header matrix-text">i5/OS Main Menu</div>
-
     <div class="system matrix-text">System: none</div>
 
     <div class="menu-list">
-      <div><a href="cv berk ketenci 10.2025.pdf" target="_blank" class="matrix-text">1. cv</a><span class="blinker"></span></div>
-      <div><a href="./low_quality_bw_headshot.jpg" target="_blank" class="matrix-text">2. jpg</a><span class="blinker"></span></div>
-      <div><a href="mailto:berkketenci@gmail.com" class="matrix-text">3. mail</a><span class="blinker"></span></div>
-      <div><a href="https://linkedin.com/in/berkketenci" target="_blank" class="matrix-text">4. linkedin</a><span class="blinker"></span></div>
+      <div class="row"><a href="cv berk ketenci 10.2025.pdf" target="_blank" class="matrix-text">1. cv</a><span class="blinker"></span></div>
+      <div class="row"><a href="./low_quality_bw_headshot.jpg" target="_blank" class="matrix-text">2. jpg</a><span class="blinker"></span></div>
+      <div class="row"><a href="mailto:berkketenci@gmail.com" class="matrix-text">3. mail</a><span class="blinker"></span></div>
+      <div class="row"><a href="https://linkedin.com/in/berkketenci" target="_blank" class="matrix-text">4. linkedin</a><span class="blinker"></span></div>
     </div>
 
-    <div class="selection-line">
-      <span class="matrix-text">Selection or command</span> <span class="matrix-text">===&gt;</span>
-    </div>
+    <div class="selection-line matrix-text">Selection or command ===&gt;</div>
 
     <div class="cursor-line">
       <span class="cursor-blink"></span>
     </div>
 
-    <div class="copyright matrix-text">
-      (C) COPYRIGHT BERKOFSKY CORP. 1991, 2026.
-    </div>
+    <div class="copyright matrix-text">(C) COPYRIGHT BERKOFSKY CORP. 1991, 2026.</div>
   </div>
 
   <audio id="beep-sound" src="./445976__breviceps__error-signal-1.wav" preload="auto"></audio>
 
   <script>
     const beep = document.getElementById("beep-sound");
-
     window.addEventListener("load", () => {
-      if (beep) {
-        beep.currentTime = 0;
-        beep.play().catch((e) => {
-          console.log("Autoplay blocked:", e);
-        });
-      }
+      if (beep) { beep.currentTime = 0; beep.play().catch(() => {}); }
     });
-
     document.addEventListener("click", () => {
-      if (beep) {
-        beep.currentTime = 0;
-        beep.play().catch((e) => {
-          console.log("Click play failed:", e);
-        });
-      }
+      if (beep) { beep.currentTime = 0; beep.play().catch(() => {}); }
     });
 
-    /* ---------- Matrix decrypt/encrypt effect ---------- */
-    const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/\\";
-    const isWhitespace = (c) => c === ' ' || c === '\n' || c === '\t';
-    const randChar = () => SCRAMBLE_CHARS[(Math.random() * SCRAMBLE_CHARS.length) | 0];
+    /* ---------------- Matrix sliding/loading lines ---------------- */
 
-    class MatrixText {
+    const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/\\~";
+    const randChar = () => CHARS[(Math.random() * CHARS.length) | 0];
+
+    function measureCharWidth(el) {
+      const probe = document.createElement('span');
+      probe.style.cssText =
+        'visibility:hidden;position:absolute;white-space:pre;' +
+        'font-family:inherit;font-size:inherit;font-weight:inherit;';
+      probe.textContent = 'M'.repeat(30);
+      el.appendChild(probe);
+      const w = probe.getBoundingClientRect().width / 30;
+      probe.remove();
+      return w || 10;
+    }
+
+    class MatrixLine {
       constructor(el) {
         this.el = el;
-        this.original = el.textContent;
-        this.chars = [...this.original];
-        this.revealed = this.chars.map(() => false);
+        this.original = (el.textContent || '').trim();
+        const align = getComputedStyle(el).textAlign;
+        this.align = (align === 'right' || align === 'end') ? 'right' : 'left';
+
+        this.fit();
+        this.buffer = Array.from(
+          { length: Math.max(this.totalChars * 3, 80) },
+          randChar
+        );
+        this.offset = 0;
+
+        this.revealed = 0;
+        this.state = 'loading';        // loading -> revealing -> idle
+        this.loadDuration = 350 + Math.random() * 450;
+        this.revealSpeed = 35 + Math.random() * 25; // ms per char
+        this.slideInterval = 50 + Math.random() * 40;
+
+        this.loadStart = performance.now() + Math.random() * 400;
+        this.lastSlide = 0;
+
         this.render();
       }
 
+      fit() {
+        const charW = measureCharWidth(this.el);
+        const lineW =
+          this.el.clientWidth ||
+          (this.el.parentElement && this.el.parentElement.clientWidth) ||
+          300;
+        this.totalChars = Math.max(
+          this.original.length + 4,
+          Math.floor(lineW / charW) - 1
+        );
+      }
+
+      charAt(i) {
+        return this.buffer[(i + this.offset) % this.buffer.length];
+      }
+
       render() {
+        const n = this.totalChars;
+        const L = this.original.length;
+        const textStart = this.align === 'right' ? n - L : 0;
+
         let out = '';
-        for (let i = 0; i < this.chars.length; i++) {
-          const c = this.chars[i];
-          if (isWhitespace(c)) out += c;
-          else if (this.revealed[i]) out += c;
-          else out += randChar();
+        for (let i = 0; i < n; i++) {
+          const p = i - textStart;
+          const inText = p >= 0 && p < L;
+          let reveal = false;
+          if (inText) {
+            if (this.align === 'right') {
+              reveal = p >= L - this.revealed;
+            } else {
+              reveal = p < this.revealed;
+            }
+          }
+          out += reveal ? this.original[p] : this.charAt(i);
         }
         this.el.textContent = out;
       }
 
-      scrambleAll() {
-        for (let i = 0; i < this.revealed.length; i++) this.revealed[i] = false;
-        this.render();
+      slide() {
+        this.offset++;
+        // churn the buffer so it doesn't look like a repeating strip
+        const idx = (Math.random() * this.buffer.length) | 0;
+        this.buffer[idx] = randChar();
       }
 
-      revealIndices() {
-        const idx = [];
-        for (let i = 0; i < this.chars.length; i++) {
-          if (!isWhitespace(this.chars[i])) idx.push(i);
+      tick(now) {
+        if (now < this.loadStart) return;
+
+        let dirty = false;
+
+        if (now - this.lastSlide >= this.slideInterval) {
+          this.slide();
+          this.lastSlide = now;
+          dirty = true;
         }
-        // shuffle
-        for (let i = idx.length - 1; i > 0; i--) {
-          const j = (Math.random() * (i + 1)) | 0;
-          [idx[i], idx[j]] = [idx[j], idx[i]];
+
+        if (this.state === 'loading') {
+          if (now - this.loadStart >= this.loadDuration) {
+            this.state = 'revealing';
+            this.revealStart = now;
+          }
+        } else if (this.state === 'revealing') {
+          const target = Math.min(
+            this.original.length,
+            Math.floor((now - this.revealStart) / this.revealSpeed)
+          );
+          if (target !== this.revealed) {
+            this.revealed = target;
+            dirty = true;
+          }
+          if (this.revealed >= this.original.length) {
+            this.state = 'idle';
+          }
         }
-        return idx;
+
+        if (dirty) this.render();
       }
 
-      decrypt(duration = 1200) {
-        const order = this.revealIndices();
-        if (order.length === 0) return Promise.resolve();
-        const perChar = Math.max(12, duration / order.length);
-        const start = performance.now();
-        let revealed = 0;
-
-        return new Promise((resolve) => {
-          const tick = () => {
-            const elapsed = performance.now() - start;
-            const target = Math.min(order.length, Math.floor(elapsed / perChar));
-            while (revealed < target) {
-              this.revealed[order[revealed]] = true;
-              revealed++;
-            }
-            this.render();
-            if (revealed < order.length) {
-              requestAnimationFrame(tick);
-            } else {
-              resolve();
-            }
-          };
-          requestAnimationFrame(tick);
-        });
-      }
-
-      flicker() {
-        const live = [];
-        for (let i = 0; i < this.chars.length; i++) {
-          if (!isWhitespace(this.chars[i]) && this.revealed[i]) live.push(i);
-        }
-        if (!live.length) return;
-        const idx = live[(Math.random() * live.length) | 0];
-        this.revealed[idx] = false;
-        this.render();
-        setTimeout(() => {
-          this.revealed[idx] = true;
-          this.render();
-        }, 50 + Math.random() * 150);
+      restart() {
+        this.state = 'loading';
+        this.revealed = 0;
+        this.loadDuration = 300 + Math.random() * 500;
+        this.revealSpeed = 30 + Math.random() * 30;
+        this.loadStart = performance.now();
       }
     }
 
-    const instances = [...document.querySelectorAll('.matrix-text')].map(el => new MatrixText(el));
+    const lines = [...document.querySelectorAll('.matrix-text')]
+      .map((el, i) => {
+        const m = new MatrixLine(el);
+        m.loadStart = performance.now() + i * 120 + Math.random() * 80;
+        return m;
+      });
 
-    (async () => {
-      // Staggered initial decrypt
-      await Promise.all(instances.map((m, i) =>
-        new Promise(res => setTimeout(res, i * 60))
-          .then(() => m.decrypt(900 + Math.random() * 700))
-      ));
+    function frame(now) {
+      for (const l of lines) l.tick(now);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
 
-      // Continuous subtle flicker — a few chars at a time across random elements
-      setInterval(() => {
-        const count = 2 + ((Math.random() * 3) | 0);
-        for (let k = 0; k < count; k++) {
-          const m = instances[(Math.random() * instances.length) | 0];
-          m.flicker();
+    // Periodically re-scramble a random line so it keeps loading
+    setInterval(() => {
+      if (!lines.length) return;
+      const l = lines[(Math.random() * lines.length) | 0];
+      if (l.state === 'idle') l.restart();
+    }, 2600);
+
+    // Rebuild dimensions on resize
+    let resizeTO;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTO);
+      resizeTO = setTimeout(() => {
+        for (const l of lines) {
+          l.fit();
+          l.buffer = Array.from(
+            { length: Math.max(l.totalChars * 3, 80) },
+            randChar
+          );
         }
-      }, 110);
-
-      // Periodic full re-scramble + decrypt on a random element
-      setInterval(() => {
-        const m = instances[(Math.random() * instances.length) | 0];
-        m.scrambleAll();
-        setTimeout(() => m.decrypt(700 + Math.random() * 800), 120);
-      }, 2800);
-    })();
+      }, 120);
+    });
   </script>
 </body>
 </html>
