@@ -53,29 +53,82 @@
       overflow-x: hidden;
     }
 
-    /* ========== BOTANICAL PLATE BACKGROUND ========== */
-    .plate-bg {
+    /* ========== BOTANICAL PLATE LAYERS ========== */
+    .bg-layer {
       position: fixed;
-      inset: 0;
-      background-image: url('botanical-bg.png');
       background-repeat: no-repeat;
-      background-position: center center;
       background-size: contain;
-      z-index: 0;
-      opacity: 0.35;
       pointer-events: none;
+      z-index: 0;
     }
 
-    /* Soft cream tint overlay so content reads cleanly on top */
+    /* CENTER — Characeae / Nitella plate (the hero) */
+    .bg-center {
+      inset: 0;
+      background-image: url('botanical-bg.jpg');
+      background-position: center center;
+      opacity: 0.36;
+    }
+
+    /* LEFT EDGE — Gramineae (grass) */
+    .bg-grass {
+      top: 0; left: 0; bottom: 0;
+      width: 28vw;
+      background-image: url('bg-grass.jpg');
+      background-position: left center;
+      opacity: 0.3;
+    }
+
+    /* RIGHT EDGE — Liliaceae (lily) */
+    .bg-lily {
+      top: 0; right: 0; bottom: 0;
+      width: 28vw;
+      background-image: url('bg-lily.jpg');
+      background-position: right center;
+      opacity: 0.3;
+    }
+
+    /* TOP-RIGHT — Filices (fern) */
+    .bg-fern {
+      top: 2vh; right: 22vw;
+      width: 14vw;
+      height: 38vh;
+      background-image: url('bg-fern.jpg');
+      background-position: top center;
+      opacity: 0.22;
+    }
+
+    /* BOTTOM-LEFT — Coluber (snake) */
+    .bg-snake {
+      bottom: 2vh; left: 22vw;
+      width: 14vw;
+      height: 38vh;
+      background-image: url('bg-snake.jpg');
+      background-position: bottom center;
+      opacity: 0.22;
+    }
+
+    /* BOTTOM CORNERS — seaweed (landscape, split between corners) */
+    .bg-seaweed {
+      bottom: 0; left: 0; right: 0;
+      height: 24vh;
+      background-image: url('bg-seaweed.jpg');
+      background-position: center bottom;
+      background-size: cover;
+      opacity: 0.18;
+    }
+
+    /* Soft cream tint over everything, denser at center for content readability */
     .plate-tint {
       position: fixed;
       inset: 0;
-      background: radial-gradient(
-        ellipse at center,
-        rgba(243, 234, 210, 0.35) 0%,
-        rgba(243, 234, 210, 0.75) 55%,
-        rgba(243, 234, 210, 0.92) 100%
-      );
+      background:
+        radial-gradient(
+          ellipse 50% 60% at center,
+          rgba(243, 234, 210, 0.78) 0%,
+          rgba(243, 234, 210, 0.55) 50%,
+          rgba(243, 234, 210, 0.40) 100%
+        );
       z-index: 1;
       pointer-events: none;
     }
@@ -158,7 +211,7 @@
       font-style: italic;
     }
     nav a:hover {
-      background: rgba(217, 182, 176, 0.25);
+      background: rgba(217, 182, 176, 0.30);
       padding-left: 0.9rem;
     }
     nav a:hover .arrow { transform: translateX(6px); opacity: 1; }
@@ -171,11 +224,29 @@
     }
 
     ::selection { background: var(--rose-2); color: #1A130E; }
+
+    /* ========== MOBILE: just the center plate ========== */
+    @media (max-width: 800px) {
+      .bg-grass, .bg-lily, .bg-fern, .bg-snake, .bg-seaweed { display: none; }
+      .plate-tint {
+        background: radial-gradient(
+          ellipse at center,
+          rgba(243, 234, 210, 0.40) 0%,
+          rgba(243, 234, 210, 0.78) 60%,
+          rgba(243, 234, 210, 0.92) 100%
+        );
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div class="plate-bg" aria-hidden="true"></div>
+  <div class="bg-layer bg-grass" aria-hidden="true"></div>
+  <div class="bg-layer bg-lily" aria-hidden="true"></div>
+  <div class="bg-layer bg-seaweed" aria-hidden="true"></div>
+  <div class="bg-layer bg-fern" aria-hidden="true"></div>
+  <div class="bg-layer bg-snake" aria-hidden="true"></div>
+  <div class="bg-layer bg-center" aria-hidden="true"></div>
   <div class="plate-tint" aria-hidden="true"></div>
 
   <main class="page">
