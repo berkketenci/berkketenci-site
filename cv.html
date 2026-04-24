@@ -241,17 +241,101 @@
       color: var(--rose);
       border-color: var(--rose);
     }
+    /* ======= Botanical plate backgrounds (screen only) ======= */
+    .bg-layer {
+      position: fixed;
+      background-repeat: no-repeat;
+      background-size: contain;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bg-center {
+      inset: 0;
+      background-image: url('botanical-bg.jpg');
+      background-position: center center;
+      opacity: 0.32;
+    }
+    .bg-grass {
+      top: 0; left: 0; bottom: 0;
+      width: 24vw;
+      background-image: url('bg-grass.jpg');
+      background-position: left center;
+      opacity: 0.26;
+    }
+    .bg-lily {
+      top: 0; right: 0; bottom: 0;
+      width: 24vw;
+      background-image: url('bg-lily.jpg');
+      background-position: right center;
+      opacity: 0.26;
+    }
+    .bg-fern {
+      top: 2vh; right: 20vw;
+      width: 12vw;
+      height: 32vh;
+      background-image: url('bg-fern.jpg');
+      background-position: top center;
+      opacity: 0.18;
+    }
+    .bg-snake {
+      bottom: 2vh; left: 20vw;
+      width: 12vw;
+      height: 32vh;
+      background-image: url('bg-snake.jpg');
+      background-position: bottom center;
+      opacity: 0.18;
+    }
+    .bg-seaweed {
+      bottom: 0; left: 0; right: 0;
+      height: 22vh;
+      background-image: url('bg-seaweed.jpg');
+      background-position: center bottom;
+      background-size: cover;
+      opacity: 0.15;
+    }
+    .plate-tint {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 55% 65% at center,
+          rgba(247, 242, 234, 0.85) 0%,
+          rgba(247, 242, 234, 0.65) 50%,
+          rgba(247, 242, 234, 0.50) 100%
+        );
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    main.cv {
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 800px) {
+      .bg-grass, .bg-lily, .bg-fern, .bg-snake, .bg-seaweed { display: none; }
+      .plate-tint {
+        background: radial-gradient(
+          ellipse at center,
+          rgba(247, 242, 234, 0.55) 0%,
+          rgba(247, 242, 234, 0.85) 70%,
+          rgba(247, 242, 234, 0.95) 100%
+        );
+      }
+    }
+
     @media print {
       .topnav { display: none; }
     }
 
     /* ======= Print adjustments ======= */
     @media print {
+      .bg-layer, .plate-tint { display: none !important; }
       html {
-        background-color: var(--paper);
+        background-color: #FFFFFF;
       }
       body {
-        background-color: var(--paper);
+        background-color: #FFFFFF;
         background-image: none;
       }
       main.cv {
@@ -265,6 +349,8 @@
         margin: 0;
         page-break-after: always;
         break-after: page;
+        background-color: #FFFFFF;
+        position: relative;
       }
       .pdf-page:last-child {
         page-break-after: auto;
@@ -276,6 +362,15 @@
   </style>
 </head>
 <body>
+
+  <div class="bg-layer bg-grass" aria-hidden="true"></div>
+  <div class="bg-layer bg-lily" aria-hidden="true"></div>
+  <div class="bg-layer bg-seaweed" aria-hidden="true"></div>
+  <div class="bg-layer bg-fern" aria-hidden="true"></div>
+  <div class="bg-layer bg-snake" aria-hidden="true"></div>
+  <div class="bg-layer bg-center" aria-hidden="true"></div>
+  <div class="plate-tint" aria-hidden="true"></div>
+
   <nav class="topnav">
     <a href="index.html">← home</a>
     <a href="cv.pdf" target="_blank">download as pdf ↓</a>
@@ -284,7 +379,6 @@
   <main class="cv">
 
     <div class="pdf-page">
-
     <header class="cv-header">
       <svg class="sprig" viewBox="0 0 70 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M35 86 Q33 60 35 38" stroke="#8CA085" stroke-width="1.4" fill="none" stroke-linecap="round"/>
@@ -400,11 +494,9 @@
           <p>Assisted with food prep, cooking, serving, and cleaning during short-term visit.</p>
         </div>
       </div>
-
     </div><!-- /pdf-page 1 -->
 
     <div class="pdf-page">
-
       <div class="entry">
         <div class="entry-meta">
           <div class="dates">Sep 2016</div>

@@ -2,7 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Berk Ketenci — Curriculum Vitae</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>kestrels breed looking farther than i can see</title>
+  <meta property="og:title" content="kestrels breed looking farther than i can see" />
+  <meta name="twitter:title" content="kestrels breed looking farther than i can see" />
+  <meta name="description" content="without tact to read" />
+  <meta property="og:description" content="without tact to read" />
+  <meta name="twitter:description" content="without tact to read" />
+  <meta property="og:url" content="https://berkketenci.com/" />
+  <meta name="twitter:url" content="https://berkketenci.com/" />
+  <meta property="og:image" content="https://berkketenci.com/thumbnailsexy.png" />
+  <meta name="twitter:image" content="https://berkketenci.com/thumbnailsexy.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/png" href="hhhhh.png">
+  <link rel="apple-touch-icon" href="hhhhh.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,7 +25,7 @@
 
   <style>
     :root {
-      --paper:   #F7F2EA;
+      --paper:   #F3EAD2;
       --ink:     #2B231D;
       --muted:   #7A6B5F;
       --rose:    #B58B85;
@@ -21,227 +36,24 @@
 
     *, *::before, *::after { box-sizing: border-box; }
 
-    @page {
-      size: A4;
-      margin: 0;
-    }
-
     html, body {
       margin: 0;
       padding: 0;
-    }
-
-    html {
-      background-color: var(--paper);
+      min-height: 100%;
     }
 
     body {
       background-color: var(--paper);
-      background-image:
-        radial-gradient(1200px 700px at 12% 8%, rgba(217, 182, 176, 0.22), transparent 60%),
-        radial-gradient(1100px 700px at 88% 92%, rgba(140, 160, 133, 0.14), transparent 60%);
       color: var(--ink);
       font-family: 'EB Garamond', 'Garamond', 'Times New Roman', serif;
-      font-size: 11.5pt;
-      line-height: 1.5;
-    }
-
-    main.cv {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 0;
-    }
-
-    /* Page containers — act as natural wrappers on screen, as A4 pages in print */
-    .pdf-page {
-      padding: 16mm 18mm;
-    }
-
-    /* ======= Header ======= */
-    .cv-header {
-      text-align: center;
-      margin-bottom: 0.4rem;
-    }
-
-    .sprig {
-      width: 44px;
-      height: 56px;
-      margin: 0 auto 0.4rem;
-      display: block;
-      transform-origin: 50% 95%;
-    }
-
-    h1 {
-      font-weight: 500;
-      font-size: 26pt;
-      letter-spacing: 0.005em;
-      margin: 0 0 0.25em 0;
-      line-height: 1.05;
-    }
-
-    .meta {
-      font-style: italic;
-      color: var(--muted);
-      font-size: 10pt;
-      margin: 0;
+      font-size: clamp(18px, 1.9vmin, 22px);
       line-height: 1.55;
-      letter-spacing: 0.01em;
-    }
-    .meta a {
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px dotted rgba(181, 139, 133, 0.6);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    /* ======= Ornamental rule ======= */
-    .rule {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-      width: 70%;
-      margin: 1rem auto;
-      color: var(--rose);
-    }
-    .rule::before, .rule::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--rule);
-    }
-    .rule span {
-      font-size: 1rem;
-      transform: translateY(-1px);
-    }
-
-    /* ======= Summary ======= */
-    .summary {
-      font-style: italic;
-      color: var(--ink);
-      font-size: 11pt;
-      line-height: 1.55;
-      text-align: center;
-      max-width: 560px;
-      margin: 0 auto;
-    }
-    .summary-2 {
-      margin-top: 0.6rem;
-      color: var(--muted);
-    }
-
-    /* ======= Section headings ======= */
-    h2 {
-      font-weight: 500;
-      font-size: 15pt;
-      text-align: center;
-      margin: 0 0 1rem 0;
-      letter-spacing: 0.01em;
-    }
-    h2 .num {
-      font-style: italic;
-      color: var(--sage);
-      margin-right: 0.35rem;
-      font-feature-settings: "onum";
-    }
-
-    /* ======= Entries: two-column (meta | body) ======= */
-    .entry {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      column-gap: 1.2rem;
-      row-gap: 0.1rem;
-      margin-bottom: 0.75rem;
-      page-break-inside: avoid;
-      break-inside: avoid;
-    }
-
-    .entry-meta {
-      text-align: right;
-      padding-top: 0.15rem;
-    }
-    .entry-meta .dates {
-      font-style: italic;
-      color: var(--rose);
-      font-size: 10pt;
-      white-space: nowrap;
-    }
-    .entry-meta .loc {
-      font-style: italic;
-      color: var(--muted);
-      font-size: 9.5pt;
-    }
-
-    .entry-body h3 {
-      font-weight: 500;
-      font-size: 11.5pt;
-      margin: 0 0 0.1rem 0;
-      line-height: 1.25;
-    }
-    .entry-body .sub {
-      font-style: italic;
-      color: var(--muted);
-      font-size: 10pt;
-      margin: 0 0 0.25rem 0;
-      line-height: 1.3;
-    }
-    .entry-body p {
-      margin: 0.1rem 0 0 0;
-      font-size: 10.75pt;
-      color: var(--ink);
-      line-height: 1.45;
-    }
-
-    /* ======= Skills / Languages ======= */
-    .skills, .langs {
-      text-align: center;
-      font-size: 11pt;
-      margin: 0.45rem 0;
-      max-width: 620px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
-    }
-    .langs {
-      font-style: italic;
-      color: var(--muted);
-    }
-
-    /* ======= Footer ======= */
-    .cv-footer {
-      text-align: center;
-      font-style: italic;
-      color: var(--muted);
-      font-size: 9pt;
-      margin-top: 1.2rem;
-      letter-spacing: 0.04em;
-    }
-
-    ::selection {
-      background: var(--rose-2);
-      color: #1A130E;
-    }
-
-    /* Small nav links above the header (web only — hidden in print/PDF) */
-    .topnav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 18px 36px 0;
-      font-size: 10.5pt;
-      font-style: italic;
-    }
-    .topnav a {
-      color: var(--muted);
-      text-decoration: none;
-      border-bottom: 1px dotted rgba(122, 107, 95, 0.5);
-      transition: color 200ms ease, border-color 200ms ease;
-    }
-    .topnav a:hover {
-      color: var(--rose);
-      border-color: var(--rose);
-    }
-    /* ======= Botanical plate backgrounds (screen only) ======= */
+    /* ========== BOTANICAL PLATE LAYERS ========== */
     .bg-layer {
       position: fixed;
       background-repeat: no-repeat;
@@ -249,115 +61,181 @@
       pointer-events: none;
       z-index: 0;
     }
+
+    /* CENTER — Characeae / Nitella plate (the hero) */
     .bg-center {
       inset: 0;
       background-image: url('botanical-bg.jpg');
       background-position: center center;
-      opacity: 0.32;
+      opacity: 0.36;
     }
+
+    /* LEFT EDGE — Gramineae (grass) */
     .bg-grass {
       top: 0; left: 0; bottom: 0;
-      width: 24vw;
+      width: 28vw;
       background-image: url('bg-grass.jpg');
       background-position: left center;
-      opacity: 0.26;
+      opacity: 0.3;
     }
+
+    /* RIGHT EDGE — Liliaceae (lily) */
     .bg-lily {
       top: 0; right: 0; bottom: 0;
-      width: 24vw;
+      width: 28vw;
       background-image: url('bg-lily.jpg');
       background-position: right center;
-      opacity: 0.26;
+      opacity: 0.3;
     }
+
+    /* TOP-RIGHT — Filices (fern) */
     .bg-fern {
-      top: 2vh; right: 20vw;
-      width: 12vw;
-      height: 32vh;
+      top: 2vh; right: 22vw;
+      width: 14vw;
+      height: 38vh;
       background-image: url('bg-fern.jpg');
       background-position: top center;
-      opacity: 0.18;
+      opacity: 0.22;
     }
+
+    /* BOTTOM-LEFT — Coluber (snake) */
     .bg-snake {
-      bottom: 2vh; left: 20vw;
-      width: 12vw;
-      height: 32vh;
+      bottom: 2vh; left: 22vw;
+      width: 14vw;
+      height: 38vh;
       background-image: url('bg-snake.jpg');
       background-position: bottom center;
-      opacity: 0.18;
+      opacity: 0.22;
     }
+
+    /* BOTTOM CORNERS — seaweed (landscape, split between corners) */
     .bg-seaweed {
       bottom: 0; left: 0; right: 0;
-      height: 22vh;
+      height: 24vh;
       background-image: url('bg-seaweed.jpg');
       background-position: center bottom;
       background-size: cover;
-      opacity: 0.15;
+      opacity: 0.18;
     }
+
+    /* Soft cream tint over everything, denser at center for content readability */
     .plate-tint {
       position: fixed;
       inset: 0;
       background:
         radial-gradient(
-          ellipse 55% 65% at center,
-          rgba(247, 242, 234, 0.85) 0%,
-          rgba(247, 242, 234, 0.65) 50%,
-          rgba(247, 242, 234, 0.50) 100%
+          ellipse 50% 60% at center,
+          rgba(243, 234, 210, 0.78) 0%,
+          rgba(243, 234, 210, 0.55) 50%,
+          rgba(243, 234, 210, 0.40) 100%
         );
       z-index: 1;
       pointer-events: none;
     }
 
-    main.cv {
+    /* ========== CONTENT ========== */
+    main.page {
       position: relative;
       z-index: 2;
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+      margin: 0 auto;
+      padding: 6vh 6vw;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.9s ease-out 0.1s forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
+    .sprig {
+      width: 70px; height: 90px; margin: 0 auto 1.6rem; display: block;
+      transform-origin: 50% 95%;
+      animation: sway 7s ease-in-out infinite;
+    }
+    @keyframes sway {
+      0%, 100% { transform: rotate(-3deg); }
+      50%      { transform: rotate(3deg); }
+    }
+
+    h1 {
+      font-weight: 500;
+      font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+      margin: 0 0 0.35em 0;
+      line-height: 1.1;
+    }
+
+    .epigraph {
+      font-style: italic;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+      margin: 0 0 2.4rem 0;
+    }
+
+    .rule {
+      display: flex; align-items: center; gap: 0.9rem;
+      width: 75%; margin: 0 auto 2rem;
+      color: var(--rose);
+    }
+    .rule::before, .rule::after {
+      content: ''; flex: 1; height: 1px; background: var(--rule);
+    }
+    .rule span { font-size: 1.05rem; letter-spacing: 0.15em; color: var(--rose); }
+
+    nav ol {
+      list-style: none; padding: 0; margin: 0 0 2.4rem 0;
+      text-align: left; max-width: 420px;
+      margin-left: auto; margin-right: auto;
+    }
+    nav li { margin: 0.45rem 0; }
+    nav a {
+      display: flex; align-items: baseline; gap: 0.9rem;
+      text-decoration: none; color: var(--ink);
+      padding: 0.35rem 0.5rem; border-radius: 3px;
+      transition: color 220ms, background 220ms, padding 220ms;
+    }
+    nav a .num {
+      font-style: italic; color: var(--sage);
+      min-width: 2.4ch; text-align: right;
+    }
+    nav a .label { flex: 1; font-size: clamp(1.1rem, 2.3vw, 1.35rem); }
+    nav a .arrow {
+      color: var(--rose); opacity: 0.55;
+      transition: transform 220ms, opacity 220ms;
+      font-style: italic;
+    }
+    nav a:hover {
+      background: rgba(217, 182, 176, 0.30);
+      padding-left: 0.9rem;
+    }
+    nav a:hover .arrow { transform: translateX(6px); opacity: 1; }
+
+    footer {
+      color: var(--muted);
+      font-style: italic;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+    }
+
+    ::selection { background: var(--rose-2); color: #1A130E; }
+
+    /* ========== MOBILE: just the center plate ========== */
     @media (max-width: 800px) {
       .bg-grass, .bg-lily, .bg-fern, .bg-snake, .bg-seaweed { display: none; }
       .plate-tint {
         background: radial-gradient(
           ellipse at center,
-          rgba(247, 242, 234, 0.55) 0%,
-          rgba(247, 242, 234, 0.85) 70%,
-          rgba(247, 242, 234, 0.95) 100%
+          rgba(243, 234, 210, 0.40) 0%,
+          rgba(243, 234, 210, 0.78) 60%,
+          rgba(243, 234, 210, 0.92) 100%
         );
       }
-    }
-
-    @media print {
-      .topnav { display: none; }
-    }
-
-    /* ======= Print adjustments ======= */
-    @media print {
-      .bg-layer, .plate-tint { display: none !important; }
-      html {
-        background-color: #FFFFFF;
-      }
-      body {
-        background-color: #FFFFFF;
-        background-image: none;
-      }
-      main.cv {
-        display: contents;
-      }
-      .pdf-page {
-        width: 210mm;
-        padding: 16mm 18mm;
-        box-sizing: border-box;
-        max-width: none;
-        margin: 0;
-        page-break-after: always;
-        break-after: page;
-        background-color: #FFFFFF;
-        position: relative;
-      }
-      .pdf-page:last-child {
-        page-break-after: auto;
-        break-after: auto;
-      }
-      .entry { page-break-inside: avoid; }
-      h2 { page-break-after: avoid; }
     }
   </style>
 </head>
@@ -371,265 +249,40 @@
   <div class="bg-layer bg-center" aria-hidden="true"></div>
   <div class="plate-tint" aria-hidden="true"></div>
 
-  <nav class="topnav">
-    <a href="index.html">← home</a>
-    <a href="cv.pdf" target="_blank">download as pdf ↓</a>
-  </nav>
+  <main class="page">
 
-  <main class="cv">
+    <svg class="sprig" viewBox="0 0 70 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M35 86 Q33 60 35 38" stroke="#8CA085" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <path d="M35 66 Q22 60 20 54 Q28 56 35 64 Z" fill="#8CA085" opacity="0.9"/>
+      <path d="M35 56 Q48 52 52 46 Q44 46 35 54 Z" fill="#8CA085" opacity="0.9"/>
+      <g transform="translate(35 30)">
+        <ellipse cx="0"  cy="-8" rx="5" ry="7" fill="#D9B6B0"/>
+        <ellipse cx="7"  cy="-2" rx="5" ry="7" fill="#D9B6B0" transform="rotate(72 7 -2)"/>
+        <ellipse cx="4"  cy="7"  rx="5" ry="7" fill="#D9B6B0" transform="rotate(144 4 7)"/>
+        <ellipse cx="-4" cy="7"  rx="5" ry="7" fill="#D9B6B0" transform="rotate(-144 -4 7)"/>
+        <ellipse cx="-7" cy="-2" rx="5" ry="7" fill="#D9B6B0" transform="rotate(-72 -7 -2)"/>
+        <circle cx="0" cy="0" r="3.2" fill="#B58B85"/>
+      </g>
+    </svg>
 
-    <div class="pdf-page">
-    <header class="cv-header">
-      <svg class="sprig" viewBox="0 0 70 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M35 86 Q33 60 35 38" stroke="#8CA085" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-        <path d="M35 66 Q22 60 20 54 Q28 56 35 64 Z" fill="#8CA085" opacity="0.9"/>
-        <path d="M35 56 Q48 52 52 46 Q44 46 35 54 Z" fill="#8CA085" opacity="0.9"/>
-        <g transform="translate(35 30)">
-          <ellipse cx="0"  cy="-8" rx="5" ry="7" fill="#D9B6B0"/>
-          <ellipse cx="7"  cy="-2" rx="5" ry="7" fill="#D9B6B0" transform="rotate(72 7 -2)"/>
-          <ellipse cx="4"  cy="7"  rx="5" ry="7" fill="#D9B6B0" transform="rotate(144 4 7)"/>
-          <ellipse cx="-4" cy="7"  rx="5" ry="7" fill="#D9B6B0" transform="rotate(-144 -4 7)"/>
-          <ellipse cx="-7" cy="-2" rx="5" ry="7" fill="#D9B6B0" transform="rotate(-72 -7 -2)"/>
-          <circle cx="0" cy="0" r="3.2" fill="#B58B85"/>
-        </g>
-      </svg>
-
-      <h1>Berk Ketenci</h1>
-      <p class="meta">
-        Istanbul, Turkey &middot; b. 4 May 1991<br>
-        <a href="mailto:berkketenci@gmail.com">berkketenci@gmail.com</a>
-        &middot; +90 536 992 2646
-        &middot; <a href="https://linkedin.com/in/berkketenci">linkedin.com/in/berkketenci</a><br>
-        Turkish &amp; Bulgarian citizen &middot; UK pre-settled status
-      </p>
-    </header>
+    <h1>Berk Ketenci</h1>
+    <p class="epigraph">kestrels breed looking farther than i can see</p>
 
     <div class="rule"><span>❀</span></div>
 
-    <p class="summary">
-      Multilingual customer service specialist and MA student in Sociocultural
-      Anthropology. Experienced in navigating diverse, high-volume customer
-      service environments for global brands such as Google, Netflix, and Dyson.
-      Passionate about human-centered research, cross-cultural communication,
-      and storytelling through qualitative methods.
-    </p>
-    <p class="summary summary-2">
-      Now looking to break into creative industries &mdash; art, cinema, media,
-      social media, writing, journalism, and content making.
-    </p>
+    <nav>
+      <ol>
+        <li><a href="cv.html"><span class="num">i.</span><span class="label">curriculum vitae</span><span class="arrow">→</span></a></li>
+        <li><a href="./low_quality_bw_headshot.jpg" target="_blank"><span class="num">ii.</span><span class="label">portrait</span><span class="arrow">→</span></a></li>
+        <li><a href="mailto:berkketenci@gmail.com"><span class="num">iii.</span><span class="label">correspondence</span><span class="arrow">→</span></a></li>
+        <li><a href="https://linkedin.com/in/berkketenci" target="_blank"><span class="num">iv.</span><span class="label">linkedin</span><span class="arrow">→</span></a></li>
+      </ol>
+    </nav>
 
     <div class="rule"><span>❀</span></div>
 
-    <!-- ========== EXPERIENCE ========== -->
-    <section>
-      <h2><span class="num">i.</span> Experience</h2>
-
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">Feb 2020 — Present</div>
-          <div class="loc">Istanbul, Turkey</div>
-        </div>
-        <div class="entry-body">
-          <h3>Career Break</h3>
-          <p>Personal and academic development. Pursuing MA in Anthropology while engaging in independent research.</p>
-        </div>
-      </div>
-
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">Oct 2019 — Feb 2020</div>
-          <div class="loc">United Kingdom</div>
-        </div>
-        <div class="entry-body">
-          <h3>Customer Service Representative &mdash; Google Play Store</h3>
-          <p class="sub">Conduent</p>
-          <p>Handled customer inquiries via email, chat, and outbound calls. Resolved issues related to digital transactions and Play Store functionality.</p>
-        </div>
-      </div>
-
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">Apr 2019 — Oct 2019</div>
-          <div class="loc">Barcelona, Spain</div>
-        </div>
-        <div class="entry-body">
-          <h3>Customer Service Agent &mdash; Dyson</h3>
-          <p class="sub">CPM International Contact Centre</p>
-          <p>Troubleshot technical problems with vacuum cleaners over the phone.</p>
-        </div>
-      </div>
-
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">Feb 2019 — Apr 2019</div>
-          <div class="loc">Lisbon, Portugal</div>
-        </div>
-        <div class="entry-body">
-          <h3>Content Reviewer &mdash; YouTube</h3>
-          <p class="sub">Cognizant</p>
-          <p>Reviewed content flagged for violating platform policies.</p>
-        </div>
-      </div>
-
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">Dec 2018 — Mar 2019</div>
-          <div class="loc">Lisbon, Portugal</div>
-        </div>
-        <div class="entry-body">
-          <h3>Customer Service Agent &mdash; Netflix</h3>
-          <p class="sub">Teleperformance</p>
-          <p>Supported users with account issues, cancellations, and service-related concerns.</p>
-        </div>
-      </div>
-
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">Feb 2018</div>
-          <div class="loc">Berlin, Germany</div>
-        </div>
-        <div class="entry-body">
-          <h3>Kitchen Assistant</h3>
-          <p class="sub">Kreuzburger</p>
-          <p>Assisted with food prep, cooking, serving, and cleaning during short-term visit.</p>
-        </div>
-      </div>
-    </div><!-- /pdf-page 1 -->
-
-    <div class="pdf-page">
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">Sep 2016</div>
-          <div class="loc">Istanbul, Turkey</div>
-        </div>
-        <div class="entry-body">
-          <h3>Intern</h3>
-          <p class="sub">Hakikat Adalet Hafıza Merkezi</p>
-          <p>Translated documentation on human rights violations and disappearances. Contributed to global memorialization archives.</p>
-        </div>
-      </div>
-
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">Nov 2013 — Jun 2014</div>
-          <div class="loc">Istanbul, Turkey</div>
-        </div>
-        <div class="entry-body">
-          <h3>Sales &amp; Customer Relations</h3>
-          <p class="sub">Ketmak Makina ve Tesis İmalat San. Tic. A.Ş.</p>
-          <p>Acted as cultural liaison between the company and its international clients. Led client visits, translated during meetings, and facilitated smooth cross-cultural communication. Represented the company at the IFAT exhibition in Munich.</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="rule"><span>❀</span></div>
-
-    <!-- ========== EDUCATION ========== -->
-    <section>
-      <h2><span class="num">ii.</span> Education</h2>
-
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">Sep 2022 — Present</div>
-          <div class="loc">Istanbul, Turkey</div>
-        </div>
-        <div class="entry-body">
-          <h3>Master of Arts, Sociocultural Anthropology</h3>
-          <p class="sub">Yeditepe University</p>
-        </div>
-      </div>
-
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">2009 — 2017</div>
-          <div class="loc">Istanbul, Turkey</div>
-        </div>
-        <div class="entry-body">
-          <h3>Bachelor of Arts, Cultural Studies</h3>
-          <p class="sub">Sabancı University</p>
-          <p>Conducted in-depth interviews for anthropology courses. Coursework in gender, media, literature, sociology, and philosophy. Language of instruction: English.</p>
-        </div>
-      </div>
-
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">Feb 2017 — Jun 2017</div>
-          <div class="loc">Amsterdam, Netherlands</div>
-        </div>
-        <div class="entry-body">
-          <h3>Erasmus Exchange Program</h3>
-          <p class="sub">University of Amsterdam</p>
-          <p>Focus: Gender and Sexuality; Housing; Documentary Film.</p>
-        </div>
-      </div>
-
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">2016</div>
-          <div class="loc">Istanbul, Turkey</div>
-        </div>
-        <div class="entry-body">
-          <h3>Summer School &mdash; Visiting Student</h3>
-          <p class="sub">Boğaziçi University</p>
-          <p>Courses: Qualitative Research Methods; Philosophy.</p>
-        </div>
-      </div>
-
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">2012 — 2013</div>
-          <div class="loc">Montreal, Canada</div>
-        </div>
-        <div class="entry-body">
-          <h3>Visiting Student</h3>
-          <p class="sub">Concordia University</p>
-          <p>Courses: Censorship in US Culture; Popular Music History; Contemporary Dance.</p>
-        </div>
-      </div>
-
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">2005 — 2009</div>
-          <div class="loc">Istanbul, Turkey</div>
-        </div>
-        <div class="entry-body">
-          <h3>High School Diploma</h3>
-          <p class="sub">Eyüboğlu Eğitim Kurumları</p>
-          <p>All classes in English, except Turkish Literature and World History.</p>
-        </div>
-      </div>
-
-      <div class="entry">
-        <div class="entry-meta">
-          <div class="dates">2007 — 2008</div>
-          <div class="loc">Portland, Oregon</div>
-        </div>
-        <div class="entry-body">
-          <h3>High School Exchange</h3>
-          <p class="sub">North Clackamas Christian School</p>
-          <p>Activities: choir (bass), orchestra (percussion), football and basketball teams.</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="rule"><span>❀</span></div>
-
-    <!-- ========== SKILLS ========== -->
-    <section>
-      <h2><span class="num">iii.</span> Skills &amp; Languages</h2>
-      <p class="skills">
-        Microsoft Office &middot; Translation (English &harr; Turkish) &middot;
-        Interviewing &amp; Ethnographic Research &middot;
-        Cross-cultural Communication &middot; Prompting &middot;
-        Video making &middot; Photography &middot; Music editing &middot; Playing bass
-      </p>
-      <p class="langs">
-        Turkish (native) &middot; English (near-native)
-      </p>
-    </section>
-
-    </div><!-- /pdf-page 2 -->
-
+    <footer>Berkofsky Corp. &middot; 1991 — 2026</footer>
   </main>
+
 </body>
 </html>
