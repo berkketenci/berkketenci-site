@@ -2,26 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <!-- rebuild trigger -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>kestrels breed looking farther than i can see</title>
   <meta property="og:title" content="kestrels breed looking farther than i can see" />
   <meta name="twitter:title" content="kestrels breed looking farther than i can see" />
-
   <meta name="description" content="without tact to read" />
   <meta property="og:description" content="without tact to read" />
   <meta name="twitter:description" content="without tact to read" />
-
   <meta property="og:url" content="https://berkketenci.com/" />
   <meta name="twitter:url" content="https://berkketenci.com/" />
-
   <meta property="og:image" content="https://berkketenci.com/thumbnailsexy.png" />
   <meta name="twitter:image" content="https://berkketenci.com/thumbnailsexy.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-   <link rel="icon" type="image/png" href="hhhhh.png">
-  <link rel="shortcut icon" type="image/png" href="hhhhh.png">
+  <link rel="icon" type="image/png" href="hhhhh.png">
   <link rel="apple-touch-icon" href="hhhhh.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,8 +25,7 @@
 
   <style>
     :root {
-      --paper:   #F7F2EA;
-      --paper-2: #FBF7F0;
+      --paper:   #F3EAD2;
       --ink:     #2B231D;
       --muted:   #7A6B5F;
       --rose:    #B58B85;
@@ -50,41 +44,65 @@
 
     body {
       background-color: var(--paper);
-      background-image:
-        radial-gradient(1200px 700px at 12% 10%, rgba(217, 182, 176, 0.28), transparent 60%),
-        radial-gradient(1100px 700px at 88% 90%, rgba(140, 160, 133, 0.18), transparent 60%),
-        radial-gradient(900px 600px at 50% 50%, rgba(255, 250, 242, 0.7), transparent 70%);
-      background-attachment: fixed;
       color: var(--ink);
       font-family: 'EB Garamond', 'Garamond', 'Times New Roman', serif;
       font-size: clamp(18px, 1.9vmin, 22px);
       line-height: 1.55;
       min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ========== BOTANICAL PLATE BACKGROUND ========== */
+    .plate-bg {
+      position: fixed;
+      inset: 0;
+      background-image: url('botanical-bg.png');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+      z-index: 0;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    /* Soft cream tint overlay so content reads cleanly on top */
+    .plate-tint {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(243, 234, 210, 0.35) 0%,
+        rgba(243, 234, 210, 0.75) 55%,
+        rgba(243, 234, 210, 0.92) 100%
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ========== CONTENT ========== */
+    main.page {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+      margin: 0 auto;
+      padding: 6vh 6vw;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: 6vh 6vw;
       opacity: 0;
       animation: fadeUp 0.9s ease-out 0.1s forwards;
     }
-
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(8px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    main.page {
-      width: 100%;
-      max-width: 520px;
-      text-align: center;
-    }
-
     .sprig {
-      width: 70px;
-      height: 90px;
-      margin: 0 auto 1.6rem;
-      display: block;
+      width: 70px; height: 90px; margin: 0 auto 1.6rem; display: block;
       transform-origin: 50% 95%;
       animation: sway 7s ease-in-out infinite;
     }
@@ -94,10 +112,8 @@
     }
 
     h1 {
-      font-family: 'EB Garamond', serif;
       font-weight: 500;
       font-size: clamp(2.2rem, 5.5vw, 3.4rem);
-      letter-spacing: 0.005em;
       margin: 0 0 0.35em 0;
       line-height: 1.1;
     }
@@ -107,85 +123,45 @@
       color: var(--muted);
       font-size: clamp(1.05rem, 2.2vw, 1.3rem);
       margin: 0 0 2.4rem 0;
-      letter-spacing: 0.01em;
     }
 
-    /* Ornamental rule with a centered glyph */
     .rule {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-      width: 75%;
-      margin: 0 auto 2rem;
+      display: flex; align-items: center; gap: 0.9rem;
+      width: 75%; margin: 0 auto 2rem;
       color: var(--rose);
     }
     .rule::before, .rule::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--rule);
+      content: ''; flex: 1; height: 1px; background: var(--rule);
     }
-    .rule span {
-      font-size: 1.05rem;
-      letter-spacing: 0.15em;
-      color: var(--rose);
-      transform: translateY(-1px);
-    }
+    .rule span { font-size: 1.05rem; letter-spacing: 0.15em; color: var(--rose); }
 
-    /* Menu — like a book's table of contents */
     nav ol {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 2.4rem 0;
-      text-align: left;
-      max-width: 420px;
-      margin-left: auto;
-      margin-right: auto;
+      list-style: none; padding: 0; margin: 0 0 2.4rem 0;
+      text-align: left; max-width: 420px;
+      margin-left: auto; margin-right: auto;
     }
-    nav li {
-      margin: 0.45rem 0;
-    }
+    nav li { margin: 0.45rem 0; }
     nav a {
-      display: flex;
-      align-items: baseline;
-      gap: 0.9rem;
-      text-decoration: none;
-      color: var(--ink);
-      padding: 0.35rem 0.5rem;
-      border-radius: 3px;
-      transition: color 220ms ease, background 220ms ease, padding 220ms ease;
+      display: flex; align-items: baseline; gap: 0.9rem;
+      text-decoration: none; color: var(--ink);
+      padding: 0.35rem 0.5rem; border-radius: 3px;
+      transition: color 220ms, background 220ms, padding 220ms;
     }
     nav a .num {
-      font-style: italic;
-      color: var(--sage);
-      min-width: 2.4ch;
-      text-align: right;
-      font-feature-settings: "onum";
+      font-style: italic; color: var(--sage);
+      min-width: 2.4ch; text-align: right;
     }
-    nav a .label {
-      flex: 1;
-      font-size: clamp(1.1rem, 2.3vw, 1.35rem);
-    }
+    nav a .label { flex: 1; font-size: clamp(1.1rem, 2.3vw, 1.35rem); }
     nav a .arrow {
-      color: var(--rose);
-      opacity: 0.55;
-      transform: translateX(0);
-      transition: transform 220ms ease, opacity 220ms ease;
+      color: var(--rose); opacity: 0.55;
+      transition: transform 220ms, opacity 220ms;
       font-style: italic;
     }
     nav a:hover {
-      background: rgba(217, 182, 176, 0.18);
-      color: #1A130E;
+      background: rgba(217, 182, 176, 0.25);
       padding-left: 0.9rem;
     }
-    nav a:hover .arrow {
-      transform: translateX(6px);
-      opacity: 1;
-    }
-    nav a:focus-visible {
-      outline: 1px dashed var(--rose);
-      outline-offset: 3px;
-    }
+    nav a:hover .arrow { transform: translateX(6px); opacity: 1; }
 
     footer {
       color: var(--muted);
@@ -194,29 +170,26 @@
       letter-spacing: 0.04em;
     }
 
-    ::selection {
-      background: var(--rose-2);
-      color: #1A130E;
-    }
+    ::selection { background: var(--rose-2); color: #1A130E; }
   </style>
 </head>
 <body>
+
+  <div class="plate-bg" aria-hidden="true"></div>
+  <div class="plate-tint" aria-hidden="true"></div>
+
   <main class="page">
 
-    <!-- small botanical sprig -->
     <svg class="sprig" viewBox="0 0 70 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <!-- stem -->
       <path d="M35 86 Q33 60 35 38" stroke="#8CA085" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-      <!-- leaves -->
       <path d="M35 66 Q22 60 20 54 Q28 56 35 64 Z" fill="#8CA085" opacity="0.9"/>
       <path d="M35 56 Q48 52 52 46 Q44 46 35 54 Z" fill="#8CA085" opacity="0.9"/>
-      <!-- flower (five soft petals) -->
       <g transform="translate(35 30)">
-        <ellipse cx="0"  cy="-8"  rx="5" ry="7" fill="#D9B6B0"/>
-        <ellipse cx="7"  cy="-2"  rx="5" ry="7" fill="#D9B6B0" transform="rotate(72 7 -2)"/>
-        <ellipse cx="4"  cy="7"   rx="5" ry="7" fill="#D9B6B0" transform="rotate(144 4 7)"/>
-        <ellipse cx="-4" cy="7"   rx="5" ry="7" fill="#D9B6B0" transform="rotate(-144 -4 7)"/>
-        <ellipse cx="-7" cy="-2"  rx="5" ry="7" fill="#D9B6B0" transform="rotate(-72 -7 -2)"/>
+        <ellipse cx="0"  cy="-8" rx="5" ry="7" fill="#D9B6B0"/>
+        <ellipse cx="7"  cy="-2" rx="5" ry="7" fill="#D9B6B0" transform="rotate(72 7 -2)"/>
+        <ellipse cx="4"  cy="7"  rx="5" ry="7" fill="#D9B6B0" transform="rotate(144 4 7)"/>
+        <ellipse cx="-4" cy="7"  rx="5" ry="7" fill="#D9B6B0" transform="rotate(-144 -4 7)"/>
+        <ellipse cx="-7" cy="-2" rx="5" ry="7" fill="#D9B6B0" transform="rotate(-72 -7 -2)"/>
         <circle cx="0" cy="0" r="3.2" fill="#B58B85"/>
       </g>
     </svg>
@@ -228,42 +201,17 @@
 
     <nav>
       <ol>
-        <li>
-          <a href="cv.html">
-            <span class="num">i.</span>
-            <span class="label">curriculum vitae</span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
-        <li>
-          <a href="./low_quality_bw_headshot.jpg" target="_blank">
-            <span class="num">ii.</span>
-            <span class="label">portrait</span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
-        <li>
-          <a href="mailto:berkketenci@gmail.com">
-            <span class="num">iii.</span>
-            <span class="label">correspondence</span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://linkedin.com/in/berkketenci" target="_blank">
-            <span class="num">iv.</span>
-            <span class="label">linkedin</span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
+        <li><a href="cv.html"><span class="num">i.</span><span class="label">curriculum vitae</span><span class="arrow">→</span></a></li>
+        <li><a href="./low_quality_bw_headshot.jpg" target="_blank"><span class="num">ii.</span><span class="label">portrait</span><span class="arrow">→</span></a></li>
+        <li><a href="mailto:berkketenci@gmail.com"><span class="num">iii.</span><span class="label">correspondence</span><span class="arrow">→</span></a></li>
+        <li><a href="https://linkedin.com/in/berkketenci" target="_blank"><span class="num">iv.</span><span class="label">linkedin</span><span class="arrow">→</span></a></li>
       </ol>
     </nav>
 
     <div class="rule"><span>❀</span></div>
 
-    <footer>
-      Berkofsky Corp. &middot; 1991 — 2026
-    </footer>
+    <footer>Berkofsky Corp. &middot; 1991 — 2026</footer>
   </main>
+
 </body>
 </html>
