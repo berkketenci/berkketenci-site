@@ -16,8 +16,8 @@
   <meta name="twitter:image" content="https://berkketenci.com/thumbnailsexy.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="icon" type="image/png" href="eyeyez.png">
-  <link rel="apple-touch-icon" href="eyeyez.png">
+  <link rel="icon" type="image/png" href="hhhhh.png">
+  <link rel="apple-touch-icon" href="hhhhh.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,12 +62,14 @@
       z-index: 0;
     }
 
-    /* CENTER — Characeae / Nitella plate (the hero) */
+    /* CENTER — engraved portrait dressed in botanicals, shifted right so face shows */
     .bg-center {
       inset: 0;
-      background-image: url('botanical-bg.jpg');
-      background-position: center center;
-      opacity: 0.36;
+      background-image: url('portrait-engraving.png');
+      background-position: 78% center;
+      background-size: auto 88vh;
+      background-repeat: no-repeat;
+      opacity: 0.40;
     }
 
     /* LEFT EDGE — Gramineae (grass) */
@@ -79,13 +81,13 @@
       opacity: 0.3;
     }
 
-    /* RIGHT EDGE — Liliaceae (lily) */
+    /* RIGHT EDGE — Liliaceae (lily) - softened since portrait is on this side */
     .bg-lily {
       top: 0; right: 0; bottom: 0;
-      width: 28vw;
+      width: 18vw;
       background-image: url('bg-lily.jpg');
       background-position: right center;
-      opacity: 0.3;
+      opacity: 0.18;
     }
 
     /* TOP-RIGHT — Filices (fern) */
@@ -118,16 +120,16 @@
       opacity: 0.18;
     }
 
-    /* Soft cream tint over everything, denser at center for content readability */
+    /* Soft cream tint — denser over text column on the left */
     .plate-tint {
       position: fixed;
       inset: 0;
       background:
         radial-gradient(
-          ellipse 50% 60% at center,
-          rgba(243, 234, 210, 0.78) 0%,
-          rgba(243, 234, 210, 0.55) 50%,
-          rgba(243, 234, 210, 0.40) 100%
+          ellipse 35% 65% at 35% 50%,
+          rgba(243, 234, 210, 0.92) 0%,
+          rgba(243, 234, 210, 0.65) 60%,
+          rgba(243, 234, 210, 0.30) 100%
         );
       z-index: 1;
       pointer-events: none;
@@ -140,7 +142,8 @@
       width: 100%;
       max-width: 520px;
       text-align: center;
-      margin: 0 auto;
+      margin-left: 8vw;
+      margin-right: auto;
       padding: 6vh 6vw;
       min-height: 100vh;
       display: flex;
@@ -228,6 +231,13 @@
     /* ========== MOBILE: just the center plate ========== */
     @media (max-width: 800px) {
       .bg-grass, .bg-lily, .bg-fern, .bg-snake, .bg-seaweed { display: none; }
+      .bg-center {
+        background-position: center center;
+      }
+      main.page {
+        margin-left: auto;
+        margin-right: auto;
+      }
       .plate-tint {
         background: radial-gradient(
           ellipse at center,
